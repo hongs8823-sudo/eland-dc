@@ -483,9 +483,9 @@ body {
       </button>
     </div>
     <div style="display:flex;flex-direction:column;gap:10px;">
-      <div class="pdf-download-area"><div class="pdf-icon">📄</div><div style="flex:1"><div class="pdf-info-title">퇴직(연)금 중간정산 신청서</div><div class="pdf-info-sub">회사 양식 · 작성 후 인사팀 제출</div></div><a class="pdf-btn" href="퇴직연금_중간정산_신청서.pdf" download="퇴직연금_중간정산_신청서.pdf">⬇ 다운로드</a></div>
-      <div class="pdf-download-area"><div class="pdf-icon">📋</div><div style="flex:1"><div class="pdf-info-title">퇴직(연)금 중간정산 신청 안내문</div><div class="pdf-info-sub">신청 절차 및 사유별 구비서류 안내</div></div><a class="pdf-btn" href="퇴직연금_중간정산_신청_안내문.pdf" download="퇴직연금_중간정산_신청_안내문.pdf">⬇ 다운로드</a></div>
-      <div class="pdf-download-area"><div class="pdf-icon">🏛️</div><div style="flex:1"><div class="pdf-info-title">지방세 세목별 과세증명서 샘플</div><div class="pdf-info-sub">주택구입·전세 신청 시 참고 서류</div></div><a class="pdf-btn" href="지방세_세목별_과세증명서_샘플.pdf" download="지방세_세목별_과세증명서_샘플.pdf">⬇ 다운로드</a></div>
+      <div class="pdf-download-area"><div class="pdf-icon">📄</div><div style="flex:1"><div class="pdf-info-title">퇴직(연)금 중간정산 신청서</div><div class="pdf-info-sub">회사 양식 · 작성 후 인사팀 제출</div></div><a class="pdf-btn" href="assets/files/퇴직(연)금 중간정산 신청서(회사양식).pdf" download="퇴직(연)금 중간정산 신청서(회사양식).pdf">⬇ 다운로드</a></div>
+      <div class="pdf-download-area"><div class="pdf-icon">📋</div><div style="flex:1"><div class="pdf-info-title">퇴직(연)금 중간정산 신청 안내문</div><div class="pdf-info-sub">신청 절차 및 사유별 구비서류 안내</div></div><a class="pdf-btn" href="assets/files/퇴직(연)금 중간정산 신청 안내문.pdf" download="퇴직(연)금 중간정산 신청 안내문.pdf">⬇ 다운로드</a></div>
+      <div class="pdf-download-area"><div class="pdf-icon">🏛️</div><div style="flex:1"><div class="pdf-info-title">지방세 세목별 과세증명서 샘플</div><div class="pdf-info-sub">주택구입·전세 신청 시 참고 서류</div></div><a class="pdf-btn" href="assets/files/지방세 세목별 과세증명서(샘플).pdf" download="지방세 세목별 과세증명서(샘플).pdf">⬇ 다운로드</a></div>
     </div>
   </div>
 
@@ -814,9 +814,10 @@ function closeProcessPopup(e) {
 }
 function downloadAll() {
   const files = [
-    { href: '퇴직연금_중간정산_신청서.pdf',     name: '퇴직연금_중간정산_신청서.pdf' },
-    { href: '퇴직연금_중간정산_신청_안내문.pdf', name: '퇴직연금_중간정산_신청_안내문.pdf' },
-    { href: '지방세_세목별_과세증명서_샘플.pdf', name: '지방세_세목별_과세증명서_샘플.pdf' }
+    { href: 'assets/files/중간정산 신청(통합).pdf',                  name: '중간정산 신청(통합).pdf' },
+    { href: 'assets/files/퇴직(연)금 중간정산 신청서(회사양식).pdf', name: '퇴직(연)금 중간정산 신청서(회사양식).pdf' },
+    { href: 'assets/files/퇴직(연)금 중간정산 신청 안내문.pdf',      name: '퇴직(연)금 중간정산 신청 안내문.pdf' },
+    { href: 'assets/files/지방세 세목별 과세증명서(샘플).pdf',       name: '지방세 세목별 과세증명서(샘플).pdf' }
   ];
   files.forEach((file, i) => {
     setTimeout(() => {
