@@ -6,552 +6,1163 @@
 <title>퇴직(연)금 중도인출 안내</title>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-  :root {
-    --blue: #1A73E8;
-    --blue-light: #E8F0FE;
-    --green: #1D9E75;
-    --green-light: #E1F5EE;
-    --green-dark: #0F6E56;
-    --red: #D93025;
-    --red-light: #FCE8E6;
-    --red-dark: #A50E0E;
-    --orange: #F29900;
-    --orange-light: #FEF3D0;
-    --orange-dark: #7A4F00;
-    --gray-100: #F8F9FA;
-    --gray-200: #E8EAED;
-    --gray-400: #9AA0A6;
-    --gray-600: #5F6368;
-    --gray-800: #3C4043;
-    --gray-900: #202124;
-    --white: #FFFFFF;
-    --radius: 12px;
-    --radius-sm: 8px;
-    --shadow: 0 2px 8px rgba(0,0,0,0.08);
-    --shadow-md: 0 4px 20px rgba(0,0,0,0.12);
-  }
+:root {
+  --blue: #1A5EAF;
+  --blue-dark: #154d91;
+  --blue-light: #E8F0FE;
+  --blue-mid: #2d7dd2;
+  --green: #1D9E75;
+  --green-light: #E1F5EE;
+  --green-dark: #0F6E56;
+  --red: #D93025;
+  --red-light: #FCE8E6;
+  --red-dark: #A50E0E;
+  --orange-light: #FEF3D0;
+  --orange-dark: #7A4F00;
+  --gray-50: #F8F9FA;
+  --gray-100: #F1F3F4;
+  --gray-200: #E8EAED;
+  --gray-300: #DADCE0;
+  --gray-400: #9AA0A6;
+  --gray-600: #5F6368;
+  --gray-800: #3C4043;
+  --gray-900: #202124;
+  --white: #FFFFFF;
+  --sidebar-w: 200px;
+  --contact-w: 340px;
+  --header-h: 90px;
+}
 
-  body {
-    font-family: 'Noto Sans KR', sans-serif;
-    background: var(--gray-100);
-    min-height: 100vh;
-    color: var(--gray-900);
-  }
+html { height: 100%; overflow: hidden; }
 
-  /* 헤더 */
-  .header {
-    background: var(--blue);
-    padding: 20px 24px;
-    text-align: center;
-  }
-  .header h1 {
-    font-size: 20px;
-    font-weight: 700;
-    color: white;
-    letter-spacing: -0.3px;
-  }
-  .header p {
-    font-size: 13px;
-    color: rgba(255,255,255,0.75);
-    margin-top: 4px;
-  }
+body {
+  font-family: 'Noto Sans KR', sans-serif;
+  background: var(--gray-50);
+  color: var(--gray-900);
+  height: 100%;
+  overflow: hidden;
+}
 
-  /* 메인 */
-  .main {
-    max-width: 480px;
-    margin: 32px auto;
-    padding: 0 16px 60px;
-  }
+/* 헤더 */
+/* 헤더 배너 */
+.app-header {
+  position: fixed; top: 0; left: 0; right: 0;
+  height: var(--header-h);
+  background: var(--blue);
+  display: flex; align-items: center; justify-content: center;
+  z-index: 200;
+  text-align: center;
+  flex-direction: column;
+  gap: 2px;
+}
+.app-header .header-title {
+  font-size: 18px; font-weight: 700; color: white;
+  letter-spacing: -0.3px;
+}
+.app-header .header-sub {
+  font-size: 12px; color: rgba(255,255,255,0.82); line-height: 1.5;
+}
 
-  /* 카드 선택 버튼 */
-  .menu-title {
-    font-size: 13px;
-    font-weight: 500;
-    color: var(--gray-600);
-    margin-bottom: 12px;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-  }
-  .menu-grid {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-  }
-  .menu-card {
-    background: var(--white);
-    border: 1.5px solid var(--gray-200);
-    border-radius: var(--radius);
-    padding: 18px 20px;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    gap: 14px;
-    transition: border-color 0.2s, box-shadow 0.2s, transform 0.15s;
-    text-align: left;
-  }
-  .menu-card:hover {
-    border-color: var(--blue);
-    box-shadow: 0 0 0 3px var(--blue-light);
-    transform: translateY(-1px);
-  }
-  .menu-card:active { transform: scale(0.99); }
-  .menu-icon {
-    width: 44px; height: 44px;
-    border-radius: 10px;
-    display: flex; align-items: center; justify-content: center;
-    font-size: 22px;
-    flex-shrink: 0;
-  }
-  .menu-icon.blue { background: var(--blue-light); }
-  .menu-icon.green { background: var(--green-light); }
-  .menu-label { font-size: 15px; font-weight: 700; color: var(--gray-900); }
-  .menu-sub { font-size: 12px; color: var(--gray-400); margin-top: 2px; }
-  .menu-arrow { margin-left: auto; color: var(--gray-400); font-size: 16px; }
+/* 사이드바 */
+.sidebar {
+  position: fixed; top: var(--header-h); left: 0; bottom: 0;
+  width: var(--sidebar-w);
+  background: var(--blue);
+  overflow-y: auto; z-index: 100;
+}
+.sidebar-item {
+  display: flex; align-items: center; gap: 10px;
+  padding: 11px 18px;
+  color: rgba(255,255,255,0.82);
+  font-size: 13.5px; cursor: pointer;
+  transition: background 0.15s;
+  border-left: 3px solid transparent;
+}
+.sidebar-item:hover { background: rgba(255,255,255,0.1); }
+.sidebar-item.active { background: rgba(255,255,255,0.18); border-left-color: white; color: white; font-weight: 700; }
+.si-icon { font-size: 15px; width: 18px; text-align: center; }
 
-  /* 모달 오버레이 */
-  .modal-overlay {
-    display: none;
-    position: fixed;
-    inset: 0;
-    background: rgba(0,0,0,0.5);
-    z-index: 100;
-    align-items: center;
-    justify-content: center;
-    padding: 16px;
-  }
-  .modal-overlay.active { display: flex; }
+/* 오른쪽 고정 연락처 */
+.contact-panel {
+  position: fixed; top: var(--header-h); right: 0; bottom: 0;
+  width: var(--contact-w);
+  background: var(--white);
+  border-left: 1px solid var(--gray-200);
+  overflow-y: auto; z-index: 100;
+  padding: 20px 16px;
+}
+.contact-panel h3 {
+  font-size: 20px; font-weight: 700; color: var(--blue);
+  text-transform: uppercase; letter-spacing: 0.5px;
+  margin-bottom: 4px; padding-bottom: 4px;
+  border-bottom: 3px solid var(--blue);
+}
+.contact-section { margin-bottom: 16px; }
+.contact-section-title { font-size: 14px; font-weight: 700; color: var(--gray-600); margin-bottom: 8px; }
+.contact-row { display: flex; gap: 6px; align-items: flex-start; margin-bottom: 7px; }
+.contact-label { font-size: 12px; color: var(--gray-600); flex-shrink: 0; min-width: 28px; }
+.contact-mail { color: var(--blue-mid); text-decoration: none; font-size: 13px; word-break: break-all; transition: color 0.15s; }
+.contact-mail:hover { color: var(--blue-dark); text-decoration: underline; }
+.contact-address { font-size: 12px; color: var(--gray-800); line-height: 1.65; }
 
-  /* 모달 시트 */
-  .modal-sheet {
-    background: var(--white);
-    width: 100%;
-    max-width: 480px;
-    border-radius: 20px;
-    padding: 0 0 28px;
-    max-height: 90vh;
-    overflow-y: auto;
-    animation: popIn 0.25s cubic-bezier(0.34,1.56,0.64,1);
-    box-shadow: 0 20px 60px rgba(0,0,0,0.25);
-  }
-  @keyframes popIn {
-    from { transform: scale(0.92); opacity: 0; }
-    to   { transform: scale(1);    opacity: 1; }
-  }
+/* 메인 콘텐츠 */
+.main-content {
+  position: fixed;
+  top: var(--header-h);
+  left: var(--sidebar-w);
+  right: var(--contact-w);
+  bottom: 0;
+  overflow-y: auto;
+  background: var(--gray-50);
+}
 
-  /* 모달 헤더 */
-  .sheet-header {
-    position: sticky;
-    top: 0;
-    background: var(--white);
-    border-bottom: 1px solid var(--gray-200);
-    padding: 18px 20px 16px;
-    z-index: 10;
-    border-radius: 20px 20px 0 0;
-  }
-  .sheet-top { display: flex; align-items: center; justify-content: space-between; }
-  .sheet-title { font-size: 16px; font-weight: 700; color: var(--gray-900); }
-  .close-btn {
-    width: 30px; height: 30px;
-    border: none; background: var(--gray-100);
-    border-radius: 50%; cursor: pointer;
-    font-size: 16px; color: var(--gray-600);
-    display: flex; align-items: center; justify-content: center;
-    transition: background 0.15s;
-  }
-  .close-btn:hover { background: var(--gray-200); }
+/* 페이지 콘텐츠 */
+.page-body { padding: 28px 28px 40px; display: none; }
+.page-body.active { display: block; }
 
-  /* 진행 바 */
-  .progress-wrap { padding: 14px 20px 0; }
-  .progress-meta { display: flex; justify-content: space-between; margin-bottom: 6px; }
-  .progress-step { font-size: 12px; color: var(--gray-400); }
-  .progress-section { font-size: 12px; font-weight: 500; color: var(--blue); }
-  .progress-track { height: 4px; background: var(--gray-200); border-radius: 2px; overflow: hidden; }
-  .progress-fill { height: 100%; background: var(--blue); border-radius: 2px; transition: width 0.4s ease; }
+.section-title { font-size: 18px; font-weight: 700; color: var(--gray-900); margin-bottom: 4px; }
+.section-sub { font-size: 13px; color: var(--gray-600); margin-bottom: 24px; }
 
-  /* 질문 카드 */
-  .question-area { padding: 20px 20px 0; }
-  .question-text { font-size: 18px; font-weight: 700; color: var(--gray-900); line-height: 1.55; margin-bottom: 10px; }
-  .question-desc {
-    font-size: 13px; color: var(--gray-600);
-    background: var(--gray-100);
-    border-left: 3px solid var(--blue);
-    padding: 10px 12px;
-    border-radius: 0 6px 6px 0;
-    line-height: 1.6;
-  }
+/* 프로세스 */
+.process-steps { display: flex; gap: 0; margin-bottom: 28px; overflow-x: auto; padding-bottom: 4px; }
+.process-step { display: flex; align-items: center; flex-shrink: 0; }
+.step-box { background: var(--white); border: 1.5px solid var(--gray-200); border-radius: 10px; padding: 14px 16px; text-align: center; min-width: 110px; }
+.step-num { font-size: 11px; color: var(--blue); font-weight: 700; margin-bottom: 4px; }
+.step-name { font-size: 13px; font-weight: 700; color: var(--gray-900); }
+.step-desc { font-size: 11px; color: var(--gray-400); margin-top: 4px; line-height: 1.4; }
+.step-arrow { padding: 0 8px; color: var(--gray-300); font-size: 18px; }
 
-  /* 버튼 */
-  .btn-area { display: flex; gap: 10px; padding: 20px 20px 0; }
-  .btn {
-    flex: 1; padding: 14px 0;
-    border: 1.5px solid var(--gray-200);
-    border-radius: var(--radius-sm);
-    font-size: 16px; font-weight: 700;
-    font-family: inherit;
-    cursor: pointer;
-    background: var(--white);
-    transition: all 0.15s;
-  }
-  .btn-yes { color: var(--green); border-color: var(--green); }
-  .btn-yes:hover { background: var(--green-light); }
-  .btn-no  { color: var(--red);   border-color: var(--red); }
-  .btn-no:hover  { background: var(--red-light); }
-  .btn:active { transform: scale(0.97); }
-  .btn:disabled { opacity: 0.35; cursor: not-allowed; }
+.info-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; margin-bottom: 22px; }
+.info-card { background: var(--white); border: 1px solid var(--gray-200); border-radius: 10px; padding: 16px 18px; }
+.info-card-title { font-size: 13px; font-weight: 700; color: var(--blue); margin-bottom: 8px; }
+.info-card-body { font-size: 12.5px; color: var(--gray-800); line-height: 1.7; }
 
-  /* 결과 */
-  .result-card {
-    margin: 20px 20px 0;
-    border-radius: var(--radius);
-    padding: 20px;
-  }
-  .result-card.ok     { background: var(--green-light); border: 1.5px solid #5DCAA5; }
-  .result-card.ng     { background: var(--red-light);   border: 1.5px solid #EF9F9F; }
-  .result-card.warn   { background: var(--orange-light);border: 1.5px solid #F5C842; }
-  .result-icon { font-size: 28px; margin-bottom: 8px; }
-  .result-title { font-size: 17px; font-weight: 700; margin-bottom: 6px; }
-  .result-card.ok   .result-title { color: var(--green-dark); }
-  .result-card.ng   .result-title { color: var(--red-dark); }
-  .result-card.warn .result-title { color: var(--orange-dark); }
-  .result-body  { font-size: 13px; line-height: 1.7; }
-  .result-card.ok   .result-body { color: #085041; }
-  .result-card.ng   .result-body { color: #6B1F1F; }
-  .result-card.warn .result-body { color: var(--orange-dark); }
+.notice-box { background: #FFF8E1; border: 1px solid #FFD54F; border-radius: 8px; padding: 14px 16px; font-size: 12.5px; color: #5D4037; line-height: 1.7; margin-bottom: 20px; }
 
-  /* 이전으로 */
-  .back-btn {
-    display: block; width: calc(100% - 40px);
-    margin: 10px 20px 0;
-    padding: 11px 0;
-    border: 1px solid var(--gray-200);
-    border-radius: var(--radius-sm);
-    background: var(--white);
-    color: var(--gray-600);
-    font-size: 14px; font-weight: 500;
-    font-family: inherit; cursor: pointer;
-    transition: background 0.15s;
-  }
-  .back-btn:hover { background: var(--gray-100); }
-  .back-btn:disabled { opacity: 0.3; cursor: not-allowed; }
+.pdf-download-area { background: var(--white); border: 1.5px dashed var(--gray-300); border-radius: 10px; padding: 18px 22px; display: flex; align-items: center; gap: 16px; }
+.pdf-icon { font-size: 30px; flex-shrink: 0; }
+.pdf-info-title { font-size: 14px; font-weight: 700; color: var(--gray-900); margin-bottom: 2px; }
+.pdf-info-sub { font-size: 12px; color: var(--gray-400); }
+.pdf-btn { background: var(--blue); color: white; border: none; border-radius: 8px; padding: 10px 16px; font-size: 13px; font-weight: 700; font-family: inherit; cursor: pointer; display: flex; align-items: center; gap: 6px; transition: background 0.15s; white-space: nowrap; flex-shrink: 0; }
+.pdf-btn:hover { background: var(--blue-dark); }
+.pdf-note { font-size: 11px; color: var(--gray-400); margin-top: 4px; }
 
-  /* 다시하기 */
-  .restart-btn {
-    display: block; width: calc(100% - 40px);
-    margin: 14px 20px 0;
-    padding: 12px 0;
-    border: 1px solid var(--gray-200);
-    border-radius: var(--radius-sm);
-    background: var(--white);
-    color: var(--gray-600);
-    font-size: 14px; font-weight: 500;
-    font-family: inherit; cursor: pointer;
-    transition: background 0.15s;
-  }
-  .restart-btn:hover { background: var(--gray-100); }
+/* 중도인출 사유 */
+.reason-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(190px, 1fr)); gap: 12px; margin-bottom: 28px; }
+.reason-card { background: var(--white); border: 1.5px solid var(--gray-200); border-radius: 12px; padding: 18px 16px; cursor: pointer; transition: border-color 0.2s, box-shadow 0.2s, transform 0.15s; display: flex; align-items: flex-start; gap: 12px; }
+.reason-card:hover { border-color: var(--blue); box-shadow: 0 0 0 3px var(--blue-light); transform: translateY(-2px); }
+.reason-card:active { transform: scale(0.98); }
+.reason-icon { font-size: 22px; flex-shrink: 0; }
+.reason-label { font-size: 13.5px; font-weight: 700; color: var(--gray-900); margin-bottom: 3px; }
+.reason-sub { font-size: 11.5px; color: var(--gray-400); line-height: 1.5; }
+.reason-arrow { margin-left: auto; color: var(--gray-300); font-size: 16px; align-self: center; }
 
-  /* 이력 */
-  .history-wrap {
-    margin: 20px 20px 0;
-    border-top: 1px solid var(--gray-200);
-    padding-top: 14px;
-  }
-  .history-title { font-size: 12px; font-weight: 700; color: var(--gray-400); margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.5px; }
-  .history-item {
-    display: flex; align-items: flex-start; gap: 8px;
-    font-size: 12px; color: var(--gray-600);
-    padding: 5px 0;
-    border-bottom: 1px solid var(--gray-100);
-  }
-  .history-item:last-child { border-bottom: none; }
-  .history-badge {
-    font-size: 11px; font-weight: 700; padding: 1px 7px;
-    border-radius: 4px; flex-shrink: 0; margin-top: 1px;
-  }
-  .badge-y { background: var(--green-light); color: var(--green-dark); }
-  .badge-n { background: var(--red-light);   color: var(--red-dark); }
+/* 모달 */
+.modal-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 300; align-items: center; justify-content: center; padding: 16px; }
+.modal-overlay.active { display: flex; }
+.modal-sheet { background: var(--white); width: 100%; max-width: 460px; border-radius: 16px; max-height: 88vh; overflow-y: auto; animation: popIn 0.22s cubic-bezier(0.34,1.56,0.64,1); box-shadow: 0 20px 60px rgba(0,0,0,0.25); }
+@keyframes popIn { from { transform: scale(0.9); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+.modal-header { position: sticky; top: 0; background: var(--white); border-bottom: 1px solid var(--gray-200); padding: 16px 20px; display: flex; align-items: center; justify-content: space-between; border-radius: 16px 16px 0 0; z-index: 10; }
+.modal-title-txt { font-size: 15px; font-weight: 700; color: var(--gray-900); }
+.modal-close { width: 28px; height: 28px; border-radius: 50%; border: none; background: var(--gray-100); cursor: pointer; font-size: 15px; color: var(--gray-600); display: flex; align-items: center; justify-content: center; transition: background 0.15s; }
+.modal-close:hover { background: var(--gray-200); }
+.modal-prog { padding: 12px 20px 0; }
+.prog-meta { display: flex; justify-content: space-between; margin-bottom: 5px; }
+.prog-step-lbl { font-size: 11px; color: var(--gray-400); }
+.prog-section-lbl { font-size: 11px; font-weight: 700; color: var(--blue); }
+.prog-track { height: 4px; background: var(--gray-200); border-radius: 2px; overflow: hidden; }
+.prog-fill { height: 100%; background: var(--blue); border-radius: 2px; transition: width 0.35s ease; }
+.modal-qarea { padding: 18px 20px 0; }
+.modal-qtext { font-size: 17px; font-weight: 700; color: var(--gray-900); line-height: 1.55; margin-bottom: 10px; }
+.modal-qdesc { font-size: 12.5px; color: var(--gray-600); background: var(--gray-50); border-left: 3px solid var(--blue); padding: 10px 12px; border-radius: 0 6px 6px 0; line-height: 1.65; }
+.modal-btns { display: flex; gap: 10px; padding: 16px 20px 0; }
+.mbtn { flex: 1; padding: 13px 0; border: 1.5px solid var(--gray-200); border-radius: 8px; font-size: 15px; font-weight: 700; font-family: inherit; cursor: pointer; background: var(--white); transition: all 0.15s; }
+.mbtn:active { transform: scale(0.97); }
+.mbtn:disabled { opacity: 0.3; cursor: not-allowed; }
+.mbtn-yes { color: var(--green); border-color: var(--green); }
+.mbtn-yes:hover:not(:disabled) { background: var(--green-light); }
+.mbtn-no { color: var(--red); border-color: var(--red); }
+.mbtn-no:hover:not(:disabled) { background: var(--red-light); }
+.modal-back { display: block; width: calc(100% - 40px); margin: 10px 20px 0; padding: 10px 0; border: 1px solid var(--gray-200); border-radius: 8px; background: var(--white); color: var(--gray-600); font-size: 13px; font-weight: 500; font-family: inherit; cursor: pointer; transition: background 0.15s; }
+.modal-back:hover { background: var(--gray-100); }
+.modal-back:disabled { opacity: 0.3; cursor: not-allowed; }
+.result-card { margin: 16px 20px 0; border-radius: 10px; padding: 18px; }
+.result-card.ok { background: var(--green-light); border: 1.5px solid #5DCAA5; }
+.result-card.ng { background: var(--red-light); border: 1.5px solid #EF9F9F; }
+.result-card.warn { background: var(--orange-light); border: 1.5px solid #F5C842; }
+.result-icon { font-size: 24px; margin-bottom: 6px; }
+.result-title { font-size: 15px; font-weight: 700; margin-bottom: 6px; }
+.result-card.ok .result-title { color: var(--green-dark); }
+.result-card.ng .result-title { color: var(--red-dark); }
+.result-card.warn .result-title { color: var(--orange-dark); }
+.result-body { font-size: 12.5px; line-height: 1.75; }
+.result-card.ok .result-body { color: #085041; }
+.result-card.ng .result-body { color: #6B1F1F; }
+.result-card.warn .result-body { color: var(--orange-dark); }
+.modal-restart { display: block; width: calc(100% - 40px); margin: 10px 20px 20px; padding: 10px 0; border: 1px solid var(--gray-200); border-radius: 8px; background: var(--white); color: var(--gray-600); font-size: 13px; font-weight: 500; font-family: inherit; cursor: pointer; transition: background 0.15s; }
+.modal-restart:hover { background: var(--gray-100); }
+.history-wrap { margin: 14px 20px 20px; border-top: 1px solid var(--gray-200); padding-top: 12px; }
+.history-title { font-size: 11px; font-weight: 700; color: var(--gray-400); margin-bottom: 8px; letter-spacing: 0.5px; text-transform: uppercase; }
+.history-item { display: flex; align-items: flex-start; gap: 8px; font-size: 11.5px; color: var(--gray-600); padding: 4px 0; border-bottom: 1px solid var(--gray-100); }
+.history-item:last-child { border-bottom: none; }
+.hbadge { font-size: 10px; font-weight: 700; padding: 1px 6px; border-radius: 4px; flex-shrink: 0; margin-top: 1px; }
+.hbadge.y { background: var(--green-light); color: var(--green-dark); }
+.hbadge.n { background: var(--red-light); color: var(--red-dark); }
+
+.coming-soon { display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 80px 20px; text-align: center; }
+.coming-soon .cs-icon { font-size: 48px; margin-bottom: 16px; }
+.coming-soon h3 { font-size: 18px; font-weight: 700; color: var(--gray-800); margin-bottom: 6px; }
+.coming-soon p { font-size: 13px; color: var(--gray-400); line-height: 1.7; }
 </style>
 </head>
 <body>
 
-<div class="header">
-  <h1>퇴직(연)금 중도인출 안내</h1>
-  <p>해당 항목을 선택하면 단계별 안내를 받을 수 있습니다</p>
+<!-- 헤더 -->
+<div class="app-header">
+  <div class="header-title"> 퇴직(연)금 중도인출 자가진단 및 신청 안내</div>
+  <div class="header-sub">
+    중도 인출 사유를 클릭하여 가능여부를 판단해 보시기 바랍니다.<br>
+    제출 서류 및 샘플자료는 하단의 양식 다운로드를 참고 바랍니다.
+  </div>
 </div>
 
-<div class="main">
-  <p class="menu-title">인출 사유 선택</p>
-  <div class="menu-grid">
-    <div class="menu-card" onclick="openModal('house')">
-      <div class="menu-icon blue">🏠</div>
-      <div>
-        <div class="menu-label">무주택자 주택구입</div>
-        <div class="menu-sub">본인 명의 주택 최초 구입 · 전세금/보증금 포함</div>
-      </div>
-      <div class="menu-arrow">›</div>
+<!-- 사이드바 -->
+<div class="sidebar">
+  <div class="sidebar-item active" onclick="switchPage('process', this)"><span class="si-icon">📋</span> 프로세스</div>
+  <div class="sidebar-item" onclick="switchPage('reason', this)"><span class="si-icon">📝</span> 중도 인출 사유</div>
+  <div class="sidebar-item" onclick="switchPage('docs', this)"><span class="si-icon">📁</span> 제출서류</div>
+  <div class="sidebar-item" onclick="switchPage('confirm', this)"><span class="si-icon">🏦</span> 퇴직연금 가입확인</div>
+</div>
+
+<!-- 오른쪽 연락처 패널 -->
+<div class="contact-panel">
+  <h3>법인별 인사행정 팀</h3>
+  <div class="contact-section">
+    <div class="contact-section-title">📧 메일 주소 (클릭 시 메일 작성)</div>
+    <div class="contact-row">
+      <span class="contact-label">월드</span>
+      <a class="contact-mail" href="mailto:EHRM-HRM@eland.co.kr?subject=퇴직연금 중도인출 문의" onclick="openOutlook('EHRM-HRM@eland.co.kr'); return false;">EHRM-HRM@eland.co.kr</a>
     </div>
-    <div class="menu-card" onclick="openModal('medical')">
-      <div class="menu-icon green">🏥</div>
-      <div>
-        <div class="menu-label">6개월 이상 요양 의료비</div>
-        <div class="menu-sub">본인·배우자·부양가족 질병·부상 요양</div>
-      </div>
-      <div class="menu-arrow">›</div>
+    <div class="contact-row">
+      <span class="contact-label">이츠</span>
+      <a class="contact-mail" href="mailto:EF_HRM@eland.co.kr?subject=퇴직연금 중도인출 문의" onclick="openOutlook('EF_HRM@eland.co.kr'); return false;">EF_HRM@eland.co.kr</a>
+    </div>
+    <div class="contact-row">
+      <span class="contact-label">파크</span>
+      <a class="contact-mail" href="mailto:EP_HRM@eland.co.kr?subject=퇴직연금 중도인출 문의" onclick="openOutlook('EP_HRM@eland.co.kr'); return false;">EP_HRM@eland.co.kr</a>
+    </div>
+    <div class="contact-row">
+      <span class="contact-label">유통</span>
+      <a class="contact-mail" href="mailto:ER_HRM@eland.co.kr?subject=퇴직연금 중도인출 문의" onclick="openOutlook('ER_HRM@eland.co.kr'); return false;">ER_HRM@eland.co.kr</a>
+    </div>
+    <div class="contact-row">
+      <span class="contact-label">기타</span>
+      <a class="contact-mail" href="mailto:ES_HRM@eland.co.kr?subject=퇴직연금 중도인출 문의" onclick="openOutlook('ES_HRM@eland.co.kr'); return false;">ES_HRM@eland.co.kr</a>
     </div>
   </div>
+  <div class="contact-section">
+    <div class="contact-section-title">📍 페이롤팀 주소</div>
+    <div class="contact-address">서울특별시 강서구 마곡동로 146 이랜드글로벌 R&amp;D센터 C동 2층</div>
+  </div>
+</div>
+
+<!-- 메인 -->
+<div class="main-content">
+  <!-- ① 프로세스 -->
+  <div class="page-body active" id="tab-process">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;">
+      <div class="section-title">■ 중도인출 프로세스</div>
+      <button onclick="openProcessPopup()" style="background:var(--blue);color:white;border:none;border-radius:6px;padding:7px 14px;font-size:12px;font-weight:700;font-family:inherit;cursor:pointer;">🔍 크게 보기</button>
+    </div>
+
+    <style>
+      /* 프로세스 탭 전용 */
+      .process-popup-overlay { display:none; position:fixed; inset:0; background:rgba(0,0,0,0.6); z-index:500; align-items:center; justify-content:center; padding:20px; }
+      .process-popup-overlay.active { display:flex; }
+      .process-popup { background:var(--white); border-radius:14px; width:98vw; max-width:1050px; max-height:90vh; overflow-y:auto; padding:24px 28px; box-shadow:0 24px 80px rgba(0,0,0,0.3); animation:popIn 0.22s cubic-bezier(0.34,1.56,0.64,1); }
+      .process-popup-header { display:flex; justify-content:space-between; align-items:center; margin-bottom:16px; border-bottom:2px solid var(--gray-200); padding-bottom:12px; }
+      .popup-close-btn { width:32px; height:32px; border-radius:50%; border:none; background:var(--gray-100); cursor:pointer; font-size:16px; display:flex; align-items:center; justify-content:center; }
+      .popup-close-btn:hover { background:var(--gray-200); }
+      .proc-wrap { overflow-x:auto; margin-bottom:20px; background:#f8f9fa; border-radius:8px; border:1px solid var(--gray-200); padding:10px 10px 6px; }
+      .proc-type-label { font-size:13px; font-weight:700; padding:4px 14px; border-radius:4px; display:inline-block; margin-bottom:8px; }
+      .proc-type-label.pension { background:#E3F2FD; color:#1565C0; border:1px solid #90CAF9; }
+      .proc-type-label.severance { background:#E8F5E9; color:#2E7D32; border:1px solid #A5D6A7; }
+      .proc-divider { height:3px; background:linear-gradient(90deg,#546E7A,#1A5EAF,#00838F); border-radius:2px; margin:16px 0 20px; }
+      /* 팝업 ops-table 스타일 */
+      .ops-table { width:100%; max-width:560px; margin:0 auto; border-collapse:collapse; border:1.5px solid var(--gray-200); border-radius:10px; overflow:hidden; }
+      .ops-table th { background:var(--blue); color:white; font-size:13px; font-weight:700; padding:11px 14px; text-align:center; }
+      .ops-table td { padding:10px 14px; font-size:13px; border-top:1px solid var(--gray-200); vertical-align:middle; }
+      .ops-table tr:nth-child(even) td { background:var(--gray-50); }
+      .ops-table .ops-num { color:var(--gray-400); font-size:12px; text-align:center; width:36px; }
+      .ops-table .ops-name { font-weight:500; color:var(--gray-900); }
+      .ops-dl-btn { display:inline-flex; align-items:center; gap:4px; background:var(--blue); color:white; border:none; border-radius:6px; padding:6px 12px; font-size:12px; font-weight:700; font-family:inherit; cursor:pointer; text-decoration:none; transition:background 0.15s; white-space:nowrap; }
+      .ops-dl-btn:hover { background:var(--blue-dark); }
+      .ops-dl-btn.disabled { background:var(--gray-300); color:var(--gray-600); cursor:default; pointer-events:none; }
+    </style>
+
+    <!-- 퇴직연금 -->
+    <span class="proc-type-label pension">🏦 퇴직연금 (DC형 / IRP)</span>
+    <div class="proc-wrap">
+      <div style="display:flex;width:100%;min-width:780px;">
+        <div style="width:18%;background:#78909C;color:white;font-size:11px;font-weight:700;text-align:center;padding:6px 2px;">1. 중도인출 신청</div>
+        <div style="width:31.4%;background:#1A5EAF;color:white;font-size:11px;font-weight:700;text-align:center;padding:6px 2px;">2. 서류검토 및 제출</div>
+        <div style="width:27.3%;background:#00838F;color:white;font-size:11px;font-weight:700;text-align:center;padding:6px 2px;">3. 전자결재</div>
+        <div style="width:23.3%;background:#5E35B1;color:white;font-size:11px;font-weight:700;text-align:center;padding:6px 2px;">4. 운용사 지급</div>
+      </div>
+      <svg viewBox="0 0 860 185" xmlns="http://www.w3.org/2000/svg" style="width:100%;min-width:780px;display:block;font-family:'Noto Sans KR',sans-serif;">
+        <defs><marker id="arr1" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto"><path d="M0,0 L0,7 L7,3.5 z" fill="#90A4AE"/></marker></defs>
+        <!-- 배경 구역 -->
+        <rect x="0"   y="0" width="155" height="170" fill="#ECEFF1" opacity="0.45"/>
+        <rect x="155" y="0" width="270" height="185" fill="#DDEEFF" opacity="0.38"/>
+        <rect x="425" y="0" width="235" height="185" fill="#E0F7F4" opacity="0.38"/>
+        <rect x="660" y="0" width="200" height="185" fill="#EDE7F6" opacity="0.38"/>
+        <!-- 사유확인 -->
+        <rect x="6" y="18" width="82" height="52" rx="5" fill="#C8E6C9" stroke="#66BB6A" stroke-width="1.4"/>
+        <text x="47" y="36" text-anchor="middle" font-size="9" font-weight="bold" fill="#1B5E20">퇴직연금</text>
+        <text x="47" y="48" text-anchor="middle" font-size="9" font-weight="bold" fill="#1B5E20">중도인출</text>
+        <text x="47" y="60" text-anchor="middle" font-size="9" font-weight="bold" fill="#1B5E20">사유확인</text>
+        <!-- 자가진단 -->
+        <rect x="6" y="82" width="82" height="34" rx="5" fill="#C8E6C9" stroke="#66BB6A" stroke-width="1.4"/>
+        <text x="47" y="96" text-anchor="middle" font-size="8.5" fill="#1B5E20">중도인출 가능여부</text>
+        <text x="47" y="108" text-anchor="middle" font-size="8.5" fill="#1B5E20">자가진단</text>
+        <!-- 제출서류준비 -->
+        <rect x="104" y="28" width="72" height="38" rx="5" fill="#ECEFF1" stroke="#90A4AE" stroke-width="1.4"/>
+        <text x="140" y="44" text-anchor="middle" font-size="9" font-weight="bold" fill="#263238">제출서류</text>
+        <text x="140" y="58" text-anchor="middle" font-size="9" font-weight="bold" fill="#263238">준비</text>
+        <!-- 서류확인(운용사) -->
+        <rect x="196" y="24" width="82" height="48" rx="5" fill="#FFF9C4" stroke="#F9A825" stroke-width="1.4"/>
+        <text x="237" y="42" text-anchor="middle" font-size="9" font-weight="bold" fill="#4E3200">서류확인</text>
+        <text x="237" y="56" text-anchor="middle" font-size="8.5" fill="#4E3200">-운용사-</text>
+        <!-- NO 원: 서류확인 박스 아래 (y=72+) -->
+        <circle cx="237" cy="90" r="11" fill="#FFEBEE" stroke="#EF9A9A" stroke-width="1.3"/>
+        <text x="237" y="93" text-anchor="middle" font-size="8" font-weight="bold" fill="#B71C1C">NO</text>
+        <!-- 서류보완 -->
+        <rect x="196" y="114" width="82" height="36" rx="5" fill="#ECEFF1" stroke="#90A4AE" stroke-width="1.4"/>
+        <text x="237" y="130" text-anchor="middle" font-size="9" font-weight="bold" fill="#263238">서류보완</text>
+        <text x="237" y="143" text-anchor="middle" font-size="8" fill="#90A4AE">↩ 재제출</text>
+        <!-- YES 원: 서류확인~원본서류전달 화살표 위 -->
+        <circle cx="298" cy="34" r="11" fill="#E8F5E9" stroke="#66BB6A" stroke-width="1.3"/>
+        <text x="298" y="38" text-anchor="middle" font-size="8" font-weight="bold" fill="#2E7D32">YES</text>
+        <!-- 원본서류 전달 -->
+        <rect x="322" y="24" width="82" height="48" rx="5" fill="#BBDEFB" stroke="#42A5F5" stroke-width="1.4"/>
+        <text x="363" y="40" text-anchor="middle" font-size="9" font-weight="bold" fill="#0D47A1">원본서류 전달</text>
+        <text x="363" y="54" text-anchor="middle" font-size="8" fill="#1565C0">신청자</text>
+        <text x="363" y="65" text-anchor="middle" font-size="8" fill="#1565C0">→ 페이롤팀</text>
+        <!-- 신청서 직인날인 -->
+        <rect x="432" y="24" width="82" height="48" rx="5" fill="#FFF9C4" stroke="#F9A825" stroke-width="1.4"/>
+        <text x="473" y="40" text-anchor="middle" font-size="9" font-weight="bold" fill="#4E3200">신청서</text>
+        <text x="473" y="52" text-anchor="middle" font-size="9" font-weight="bold" fill="#4E3200">직인 날인</text>
+        <text x="473" y="64" text-anchor="middle" font-size="8.5" fill="#4E3200">-페이롤팀-</text>
+        <!-- 전자결재 기안 -->
+        <rect x="535" y="24" width="82" height="48" rx="5" fill="#FFF9C4" stroke="#F9A825" stroke-width="1.4"/>
+        <text x="576" y="44" text-anchor="middle" font-size="9" font-weight="bold" fill="#4E3200">전자결재</text>
+        <text x="576" y="58" text-anchor="middle" font-size="9" font-weight="bold" fill="#4E3200">기안</text>
+        <!-- 원본서류수령 지급결정 (4번 구역 꽉 채움) -->
+        <rect x="664" y="24" width="88" height="48" rx="5" fill="#B2EBF2" stroke="#26C6DA" stroke-width="1.4"/>
+        <text x="708" y="38" text-anchor="middle" font-size="8.5" font-weight="bold" fill="#004D40">원본서류수령</text>
+        <text x="708" y="51" text-anchor="middle" font-size="8.5" font-weight="bold" fill="#004D40">지급결정</text>
+        <text x="708" y="63" text-anchor="middle" font-size="8.5" fill="#1B5E20">운용사</text>
+        <!-- 입금 (4번 구역 꽉 채움) -->
+        <rect x="764" y="24" width="88" height="48" rx="5" fill="#E8EAF6" stroke="#3949AB" stroke-width="1.8"/>
+        <text x="808" y="44" text-anchor="middle" font-size="9.5" font-weight="bold" fill="#1A237E">입금</text>
+        <text x="808" y="58" text-anchor="middle" font-size="8" fill="#3949AB">운용사→개인</text>
+        <!-- 화살표 -->
+        <line x1="88" y1="48" x2="102" y2="48" stroke="#90A4AE" stroke-width="1.3" marker-end="url(#arr1)"/>
+        <line x1="176" y1="48" x2="194" y2="48" stroke="#90A4AE" stroke-width="1.3" marker-end="url(#arr1)"/>
+        <!-- 서류확인 우측→YES원 위 지나→원본서류전달 -->
+        <line x1="278" y1="48" x2="320" y2="48" stroke="#90A4AE" stroke-width="1.3" stroke-dasharray="3,2" marker-end="url(#arr1)"/>
+        <!-- NO: 서류확인 아래→NO원→서류보완 -->
+        <line x1="220" y1="72" x2="220" y2="109" stroke="#90A4AE" stroke-width="1.3" stroke-dasharray="3,2" marker-end="url(#arr1)"/>
+        <!-- 메인 흐름 -->
+        <line x1="404" y1="48" x2="430" y2="48" stroke="#90A4AE" stroke-width="1.3" marker-end="url(#arr1)"/>
+        <line x1="514" y1="48" x2="533" y2="48" stroke="#90A4AE" stroke-width="1.3" marker-end="url(#arr1)"/>
+        <line x1="617" y1="48" x2="662" y2="48" stroke="#90A4AE" stroke-width="1.3" marker-end="url(#arr1)"/>
+        <line x1="752" y1="48" x2="762" y2="48" stroke="#90A4AE" stroke-width="1.3" stroke-dasharray="3,2" marker-end="url(#arr1)"/>
+      </svg>
+    </div>
+
+    <div class="proc-divider"></div>
+
+    <!-- 퇴직금 -->
+    <span class="proc-type-label severance">💼 퇴직금 (퇴직연금 미가입자)</span>
+    <div class="proc-wrap">
+      <div style="display:flex;width:100%;min-width:780px;">
+        <div style="width:18%;background:#78909C;color:white;font-size:11px;font-weight:700;text-align:center;padding:6px 2px;">1. 중도인출 신청</div>
+        <div style="width:18%;background:#1A5EAF;color:white;font-size:11px;font-weight:700;text-align:center;padding:6px 2px;">2. 서류검토</div>
+        <div style="width:18%;background:#00838F;color:white;font-size:11px;font-weight:700;text-align:center;padding:6px 2px;">3. 전자결재</div>
+        <div style="width:23%;background:#5E35B1;color:white;font-size:11px;font-weight:700;text-align:center;padding:6px 2px;">4. 서류제출</div>
+        <div style="width:23%;background:#1A237E;color:white;font-size:11px;font-weight:700;text-align:center;padding:6px 2px;">5. 회사 지급</div>
+      </div>
+      <svg viewBox="0 0 860 185" xmlns="http://www.w3.org/2000/svg" style="width:100%;min-width:780px;display:block;font-family:'Noto Sans KR',sans-serif;">
+        <defs><marker id="arr2" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto"><path d="M0,0 L0,7 L7,3.5 z" fill="#90A4AE"/></marker></defs>
+        <!-- 배경 구역 5단계 -->
+        <rect x="0"   y="0" width="155" height="170" fill="#ECEFF1" opacity="0.45"/>
+        <rect x="155" y="0" width="155" height="185" fill="#DDEEFF" opacity="0.38"/>
+        <rect x="310" y="0" width="155" height="185" fill="#E0F7F4" opacity="0.38"/>
+        <rect x="465" y="0" width="195" height="185" fill="#EDE7F6" opacity="0.38"/>
+        <rect x="660" y="0" width="200" height="185" fill="#E8EAF6" opacity="0.38"/>
+        <!-- 사유확인 -->
+        <rect x="6" y="18" width="82" height="52" rx="5" fill="#C8E6C9" stroke="#66BB6A" stroke-width="1.4"/>
+        <text x="47" y="36" text-anchor="middle" font-size="9" font-weight="bold" fill="#1B5E20">퇴직금</text>
+        <text x="47" y="48" text-anchor="middle" font-size="9" font-weight="bold" fill="#1B5E20">중도인출</text>
+        <text x="47" y="60" text-anchor="middle" font-size="9" font-weight="bold" fill="#1B5E20">사유확인</text>
+        <!-- 자가진단 -->
+        <rect x="6" y="82" width="82" height="34" rx="5" fill="#C8E6C9" stroke="#66BB6A" stroke-width="1.4"/>
+        <text x="47" y="96" text-anchor="middle" font-size="8.5" fill="#1B5E20">중도인출 가능여부</text>
+        <text x="47" y="108" text-anchor="middle" font-size="8.5" fill="#1B5E20">자가진단</text>
+        <!-- 제출서류준비 -->
+        <rect x="104" y="28" width="72" height="38" rx="5" fill="#ECEFF1" stroke="#90A4AE" stroke-width="1.4"/>
+        <text x="140" y="44" text-anchor="middle" font-size="9" font-weight="bold" fill="#263238">제출서류</text>
+        <text x="140" y="58" text-anchor="middle" font-size="9" font-weight="bold" fill="#263238">준비</text>
+        <!-- 서류확인(페이롤팀) -->
+        <rect x="196" y="24" width="82" height="48" rx="5" fill="#FFF9C4" stroke="#F9A825" stroke-width="1.4"/>
+        <text x="237" y="42" text-anchor="middle" font-size="9" font-weight="bold" fill="#4E3200">서류확인</text>
+        <text x="237" y="56" text-anchor="middle" font-size="8.5" fill="#4E3200">-페이롤팀-</text>
+        <!-- NO 원: 서류확인 아래 -->
+        <circle cx="237" cy="90" r="11" fill="#FFEBEE" stroke="#EF9A9A" stroke-width="1.3"/>
+        <text x="237" y="93" text-anchor="middle" font-size="8" font-weight="bold" fill="#B71C1C">NO</text>
+        <!-- 서류보완 -->
+        <rect x="196" y="114" width="82" height="36" rx="5" fill="#ECEFF1" stroke="#90A4AE" stroke-width="1.4"/>
+        <text x="237" y="130" text-anchor="middle" font-size="9" font-weight="bold" fill="#263238">서류보완</text>
+        <text x="237" y="143" text-anchor="middle" font-size="8" fill="#90A4AE">↩ 재제출</text>
+        <!-- YES 원: 화살표 위 -->
+        <circle cx="298" cy="34" r="11" fill="#E8F5E9" stroke="#66BB6A" stroke-width="1.3"/>
+        <text x="298" y="38" text-anchor="middle" font-size="8" font-weight="bold" fill="#2E7D32">YES</text>
+        <!-- 전자결재 기안 -->
+        <rect x="322" y="24" width="82" height="48" rx="5" fill="#FFF9C4" stroke="#F9A825" stroke-width="1.4"/>
+        <text x="363" y="44" text-anchor="middle" font-size="9" font-weight="bold" fill="#4E3200">전자결재</text>
+        <text x="363" y="58" text-anchor="middle" font-size="9" font-weight="bold" fill="#4E3200">기안</text>
+        <!-- 원본서류 전달 (4번 구역) -->
+        <rect x="470" y="24" width="88" height="48" rx="5" fill="#BBDEFB" stroke="#42A5F5" stroke-width="1.4"/>
+        <text x="514" y="40" text-anchor="middle" font-size="9" font-weight="bold" fill="#0D47A1">원본서류 전달</text>
+        <text x="514" y="54" text-anchor="middle" font-size="8" fill="#1565C0">신청자</text>
+        <text x="514" y="65" text-anchor="middle" font-size="8" fill="#1565C0">→ 페이롤팀</text>
+        <!-- 원본서류수령 지급결정 (4번 구역) -->
+        <rect x="566" y="24" width="88" height="48" rx="5" fill="#ECEFF1" stroke="#90A4AE" stroke-width="1.4"/>
+        <text x="610" y="38" text-anchor="middle" font-size="8.5" font-weight="bold" fill="#263238">원본서류수령</text>
+        <text x="610" y="51" text-anchor="middle" font-size="8.5" font-weight="bold" fill="#263238">지급결정</text>
+        <text x="610" y="63" text-anchor="middle" font-size="8.5" fill="#1565C0">페이롤팀</text>
+        <!-- 입금 (5번 구역 꽉 채움) -->
+        <rect x="666" y="24" width="88" height="48" rx="5" fill="#ECEFF1" stroke="#546E7A" stroke-width="1.8"/>
+        <text x="710" y="44" text-anchor="middle" font-size="9.5" font-weight="bold" fill="#263238">입금</text>
+        <text x="710" y="58" text-anchor="middle" font-size="8" fill="#1565C0">페이롤팀→개인</text>
+        <!-- 화살표 -->
+        <line x1="88" y1="48" x2="102" y2="48" stroke="#90A4AE" stroke-width="1.3" marker-end="url(#arr2)"/>
+        <line x1="176" y1="48" x2="194" y2="48" stroke="#90A4AE" stroke-width="1.3" marker-end="url(#arr2)"/>
+        <!-- 서류확인→(YES위)→전자결재 -->
+        <line x1="278" y1="48" x2="320" y2="48" stroke="#90A4AE" stroke-width="1.3" stroke-dasharray="3,2" marker-end="url(#arr2)"/>
+        <!-- NO →서류보완 -->
+        <line x1="220" y1="72" x2="220" y2="109" stroke="#90A4AE" stroke-width="1.3" stroke-dasharray="3,2" marker-end="url(#arr2)"/>
+        <!-- 전자결재→원본전달 -->
+        <line x1="404" y1="48" x2="468" y2="48" stroke="#90A4AE" stroke-width="1.3" marker-end="url(#arr2)"/>
+        <!-- 원본전달→원본수령 -->
+        <line x1="558" y1="48" x2="564" y2="48" stroke="#90A4AE" stroke-width="1.3" stroke-dasharray="3,2" marker-end="url(#arr2)"/>
+        <!-- 원본수령→입금 -->
+        <line x1="654" y1="48" x2="664" y2="48" stroke="#90A4AE" stroke-width="1.3" stroke-dasharray="3,2" marker-end="url(#arr2)"/>
+      </svg>
+    </div>
+
+        <div class="notice-box">
+      <strong>⚠ 유의사항</strong><br>
+      • 중도인출은 <strong>DC형 퇴직연금 / 개인형 IRP</strong>만 가능하며, DB형은 불가합니다.<br>
+      • 중도인출 시 <strong>퇴직소득세 또는 연금소득세</strong>가 원천징수됩니다.<br>
+      • 사유에 따라 과세 방식이 다르므로 ②번 탭에서 사유를 먼저 확인하세요.
+    </div>
+    <div class="info-cards">
+      <div class="info-card"><div class="info-card-title">📋 신청 방법</div><div class="info-card-body">법인별 인사행정팀 이메일로 신청서 및 증빙서류를 제출합니다. 오른쪽 연락처를 참고하세요.</div></div>
+      <div class="info-card"><div class="info-card-title">⏱ 처리 기간</div><div class="info-card-body">서류 접수 후 통상 <strong>5~10 영업일</strong> 이내 처리됩니다. 서류 미비 시 반려될 수 있습니다.</div></div>
+      <div class="info-card"><div class="info-card-title">💵 세금 안내</div><div class="info-card-body">주택구입·전세: 퇴직소득세 100%<br>장기요양·파산 등: 연금소득세 (3.3~5.5%)</div></div>
+    </div>
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;">
+      <div style="font-size:13px;font-weight:700;color:var(--gray-800);">📎 양식 다운로드</div>
+      <button onclick="downloadAll()" style="background:var(--blue);color:white;border:none;border-radius:8px;padding:9px 16px;font-size:13px;font-weight:700;font-family:inherit;cursor:pointer;display:flex;align-items:center;gap:6px;transition:background 0.15s;"
+        onmouseover="this.style.background='var(--blue-dark)'" onmouseout="this.style.background='var(--blue)'">
+        ⬇ 모두 다운로드
+      </button>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:10px;">
+      <div class="pdf-download-area"><div class="pdf-icon">📄</div><div style="flex:1"><div class="pdf-info-title">퇴직(연)금 중간정산 신청서</div><div class="pdf-info-sub">회사 양식 · 작성 후 인사팀 제출</div></div><a class="pdf-btn" href="퇴직연금_중간정산_신청서.pdf" download="퇴직연금_중간정산_신청서.pdf">⬇ 다운로드</a></div>
+      <div class="pdf-download-area"><div class="pdf-icon">📋</div><div style="flex:1"><div class="pdf-info-title">퇴직(연)금 중간정산 신청 안내문</div><div class="pdf-info-sub">신청 절차 및 사유별 구비서류 안내</div></div><a class="pdf-btn" href="퇴직연금_중간정산_신청_안내문.pdf" download="퇴직연금_중간정산_신청_안내문.pdf">⬇ 다운로드</a></div>
+      <div class="pdf-download-area"><div class="pdf-icon">🏛️</div><div style="flex:1"><div class="pdf-info-title">지방세 세목별 과세증명서 샘플</div><div class="pdf-info-sub">주택구입·전세 신청 시 참고 서류</div></div><a class="pdf-btn" href="지방세_세목별_과세증명서_샘플.pdf" download="지방세_세목별_과세증명서_샘플.pdf">⬇ 다운로드</a></div>
+    </div>
+  </div>
+
+  <!-- ② 중도 인출 사유 (3행 2열) -->
+  <div class="page-body" id="tab-reason">
+    <div class="section-title">중도 인출 사유 선택</div>
+    <div class="section-sub">해당하는 사유를 선택하면 단계별 요건을 확인할 수 있습니다.</div>
+    <div style="display:flex;justify-content:center;margin-top:16px;">
+      <div style="display:grid;grid-template-columns:repeat(2,340px);gap:20px;">
+
+        <div onclick="openModal('house')" style="background:var(--white);border:1.5px solid var(--gray-200);border-radius:14px;padding:28px 24px;cursor:pointer;transition:border-color 0.2s,box-shadow 0.2s,transform 0.15s;display:flex;flex-direction:column;gap:12px;"
+          onmouseover="this.style.borderColor='var(--blue)';this.style.boxShadow='0 0 0 3px var(--blue-light)';this.style.transform='translateY(-2px)'"
+          onmouseout="this.style.borderColor='var(--gray-200)';this.style.boxShadow='none';this.style.transform='none'">
+          <div style="display:flex;align-items:center;justify-content:space-between;">
+            <div style="display:flex;align-items:center;gap:12px;">
+              <span style="font-size:30px;">🏠</span>
+              <span style="font-size:16px;font-weight:700;color:var(--gray-900);">무주택자 주택구입</span>
+            </div>
+            <span style="font-size:20px;color:var(--gray-300);">›</span>
+          </div>
+          <div style="font-size:13px;color:var(--gray-400);padding-left:42px;">본인·배우자 공동 명의 주택 구입</div>
+        </div>
+
+        <div onclick="openModal('jeonse')" style="background:var(--white);border:1.5px solid var(--gray-200);border-radius:14px;padding:28px 24px;cursor:pointer;transition:border-color 0.2s,box-shadow 0.2s,transform 0.15s;display:flex;flex-direction:column;gap:12px;"
+          onmouseover="this.style.borderColor='var(--blue)';this.style.boxShadow='0 0 0 3px var(--blue-light)';this.style.transform='translateY(-2px)'"
+          onmouseout="this.style.borderColor='var(--gray-200)';this.style.boxShadow='none';this.style.transform='none'">
+          <div style="display:flex;align-items:center;justify-content:space-between;">
+            <div style="display:flex;align-items:center;gap:12px;">
+              <span style="font-size:30px;">🔑</span>
+              <span style="font-size:16px;font-weight:700;color:var(--gray-900);">전(월)세자금</span>
+            </div>
+            <span style="font-size:20px;color:var(--gray-300);">›</span>
+          </div>
+          <div style="font-size:13px;color:var(--gray-400);padding-left:42px;">본인·배우자 명의 전월세 계약</div>
+        </div>
+
+        <div onclick="openModal('medical')" style="background:var(--white);border:1.5px solid var(--gray-200);border-radius:14px;padding:28px 24px;cursor:pointer;transition:border-color 0.2s,box-shadow 0.2s,transform 0.15s;display:flex;flex-direction:column;gap:12px;"
+          onmouseover="this.style.borderColor='var(--blue)';this.style.boxShadow='0 0 0 3px var(--blue-light)';this.style.transform='translateY(-2px)'"
+          onmouseout="this.style.borderColor='var(--gray-200)';this.style.boxShadow='none';this.style.transform='none'">
+          <div style="display:flex;align-items:center;justify-content:space-between;">
+            <div style="display:flex;align-items:center;gap:12px;">
+              <span style="font-size:30px;">🏥</span>
+              <span style="font-size:16px;font-weight:700;color:var(--gray-900);">6개월 이상 요양 (의료비)</span>
+            </div>
+            <span style="font-size:20px;color:var(--gray-300);">›</span>
+          </div>
+          <div style="font-size:13px;color:var(--gray-400);padding-left:42px;">가입자·배우자·부양가족 장기 치료</div>
+        </div>
+
+        <div onclick="openModal('recovery')" style="background:var(--white);border:1.5px solid var(--gray-200);border-radius:14px;padding:28px 24px;cursor:pointer;transition:border-color 0.2s,box-shadow 0.2s,transform 0.15s;display:flex;flex-direction:column;gap:12px;"
+          onmouseover="this.style.borderColor='var(--blue)';this.style.boxShadow='0 0 0 3px var(--blue-light)';this.style.transform='translateY(-2px)'"
+          onmouseout="this.style.borderColor='var(--gray-200)';this.style.boxShadow='none';this.style.transform='none'">
+          <div style="display:flex;align-items:center;justify-content:space-between;">
+            <div style="display:flex;align-items:center;gap:12px;">
+              <span style="font-size:30px;">⚖️</span>
+              <span style="font-size:16px;font-weight:700;color:var(--gray-900);">개인회생</span>
+            </div>
+            <span style="font-size:20px;color:var(--gray-300);">›</span>
+          </div>
+          <div style="font-size:13px;color:var(--gray-400);padding-left:42px;">법원 개인회생개시결정 후 변제 기간 중</div>
+        </div>
+
+        <div onclick="openModal('bankrupt')" style="background:var(--white);border:1.5px solid var(--gray-200);border-radius:14px;padding:28px 24px;cursor:pointer;transition:border-color 0.2s,box-shadow 0.2s,transform 0.15s;display:flex;flex-direction:column;gap:12px;"
+          onmouseover="this.style.borderColor='var(--blue)';this.style.boxShadow='0 0 0 3px var(--blue-light)';this.style.transform='translateY(-2px)'"
+          onmouseout="this.style.borderColor='var(--gray-200)';this.style.boxShadow='none';this.style.transform='none'">
+          <div style="display:flex;align-items:center;justify-content:space-between;">
+            <div style="display:flex;align-items:center;gap:12px;">
+              <span style="font-size:30px;">🏛️</span>
+              <span style="font-size:16px;font-weight:700;color:var(--gray-900);">파산선고</span>
+            </div>
+            <span style="font-size:20px;color:var(--gray-300);">›</span>
+          </div>
+          <div style="font-size:13px;color:var(--gray-400);padding-left:42px;">법원 개인파산선고 후 5년 이내</div>
+        </div>
+
+        <div onclick="openModal('disaster')" style="background:var(--white);border:1.5px solid var(--gray-200);border-radius:14px;padding:28px 24px;cursor:pointer;transition:border-color 0.2s,box-shadow 0.2s,transform 0.15s;display:flex;flex-direction:column;gap:12px;"
+          onmouseover="this.style.borderColor='var(--blue)';this.style.boxShadow='0 0 0 3px var(--blue-light)';this.style.transform='translateY(-2px)'"
+          onmouseout="this.style.borderColor='var(--gray-200)';this.style.boxShadow='none';this.style.transform='none'">
+          <div style="display:flex;align-items:center;justify-content:space-between;">
+            <div style="display:flex;align-items:center;gap:12px;">
+              <span style="font-size:30px;">🌪️</span>
+              <span style="font-size:16px;font-weight:700;color:var(--gray-900);">천재지변</span>
+            </div>
+            <span style="font-size:20px;color:var(--gray-300);">›</span>
+          </div>
+          <div style="font-size:13px;color:var(--gray-400);padding-left:42px;">특별재난지역 선포 등 재난 피해</div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- ③ 제출서류 -->
+  <div class="page-body" id="tab-docs">
+    <div class="section-title">제출서류 안내</div>
+    <div class="section-sub">운용사별 중도 인출 신청서를 다운로드하세요. (양식은 순차 업데이트 예정)</div>
+    <table class="ops-table">
+      <thead><tr><th style="width:36px;">No.</th><th>운용사</th><th>중도 인출 신청서</th></tr></thead>
+      <tbody>
+        <tr><td class="ops-num">1</td><td class="ops-name">교보생명</td><td><span class="ops-dl-btn disabled">준비중</span></td></tr>
+        <tr><td class="ops-num">2</td><td class="ops-name">국민은행</td><td><span class="ops-dl-btn disabled">준비중</span></td></tr>
+        <tr><td class="ops-num">3</td><td class="ops-name">농협</td><td><span class="ops-dl-btn disabled">준비중</span></td></tr>
+        <tr><td class="ops-num">4</td><td class="ops-name">대구은행</td><td><span class="ops-dl-btn disabled">준비중</span></td></tr>
+        <tr><td class="ops-num">5</td><td class="ops-name">미래에셋증권</td><td><span class="ops-dl-btn disabled">준비중</span></td></tr>
+        <tr><td class="ops-num">6</td><td class="ops-name">미래에셋생명</td><td><span class="ops-dl-btn disabled">준비중</span></td></tr>
+        <tr><td class="ops-num">7</td><td class="ops-name">산업</td><td><span class="ops-dl-btn disabled">준비중</span></td></tr>
+        <tr><td class="ops-num">8</td><td class="ops-name">삼성생명</td><td><span class="ops-dl-btn disabled">준비중</span></td></tr>
+        <tr><td class="ops-num">9</td><td class="ops-name">신한</td><td><span class="ops-dl-btn disabled">준비중</span></td></tr>
+        <tr><td class="ops-num">10</td><td class="ops-name">신한금융투자</td><td><span class="ops-dl-btn disabled">준비중</span></td></tr>
+        <tr><td class="ops-num">11</td><td class="ops-name">우리은행</td><td><span class="ops-dl-btn disabled">준비중</span></td></tr>
+        <tr><td class="ops-num">12</td><td class="ops-name">하나</td><td><span class="ops-dl-btn disabled">준비중</span></td></tr>
+        <tr><td class="ops-num">14</td><td class="ops-name">한화</td><td><span class="ops-dl-btn disabled">준비중</span></td></tr>
+        <tr><td class="ops-num">15</td><td class="ops-name">삼성증권</td><td><span class="ops-dl-btn disabled">준비중</span></td></tr>
+        <tr><td class="ops-num">16</td><td class="ops-name">KB증권</td><td><span class="ops-dl-btn disabled">준비중</span></td></tr>
+        <tr><td class="ops-num">17</td><td class="ops-name">NH투자증권</td><td><span class="ops-dl-btn disabled">준비중</span></td></tr>
+      </tbody>
+    </table>
+    <p style="text-align:center;margin-top:14px;font-size:12px;color:var(--gray-400);">※ 운용사 양식 변경 시 업로드될 예정입니다.</p>
+  </div>
+
+  <!-- ④ 퇴직연금 가입 확인 -->
+  <div class="page-body" id="tab-confirm">
+    <div class="section-title">퇴직연금 가입 확인</div>
+    <div class="section-sub">아래 버튼을 클릭하여 나의 퇴직(연)금 가입 여부를 확인하세요.</div>
+    <div style="display:flex;flex-direction:column;align-items:center;padding:40px 20px;">
+      <div style="font-size:52px;margin-bottom:22px;">🏦</div>
+      <a href="https://hrlink.eland.co.kr/ess/retpay/retpayView" target="_blank"
+         style="background:var(--blue);color:white;border:none;border-radius:10px;padding:14px 36px;font-size:16px;font-weight:700;font-family:inherit;cursor:pointer;text-decoration:none;display:inline-block;transition:background 0.15s;box-shadow:0 4px 14px rgba(26,94,175,0.3);"
+         onmouseover="this.style.background='var(--blue-dark)'" onmouseout="this.style.background='var(--blue)'">
+        🔍 나의 퇴직(연)금 확인하기
+      </a>
+      <div style="margin-top:28px;background:var(--white);border:1px solid var(--gray-200);border-radius:10px;padding:20px 28px;max-width:480px;width:100%;">
+        <div style="font-size:13px;font-weight:700;color:var(--gray-800);margin-bottom:10px;">📌 확인 방법 안내</div>
+        <div style="font-size:13px;color:var(--gray-800);line-height:1.9;">
+          • 조회 내용이 <strong style="color:var(--green-dark);">확인되는 임직원</strong>은 <strong>퇴직연금 가입자</strong>입니다.<br>
+          • <strong style="color:var(--red-dark);">'조회할 내용이 없습니다'</strong>라고 표기되는 임직원은 <strong>퇴직연금 미가입자</strong>입니다.
+        </div>
+      </div><strong style="color:var(--red-dark);margin-top:6px;">※ 외부 와이파이 접속 시 확인 할 수 없습니다.</strong>
+    </div>
+  </div>
+</div>
+
+<!-- 프로세스 크게보기 팝업 -->
+<div class="process-popup-overlay" id="processPopup" onclick="closeProcessPopup(event)">
+  <div class="process-popup">
+    <div class="process-popup-header">
+      <div style="font-size:16px;font-weight:700;">■ 중도인출 프로세스 전체보기</div>
+      <button class="popup-close-btn" onclick="document.getElementById('processPopup').classList.remove('active')">✕</button>
+    </div>
+    <!-- 퇴직연금 -->
+    <p style="font-size:13px;font-weight:700;color:#1565C0;margin-bottom:8px;">🏦 퇴직연금 (DC형 / IRP)</p>
+    <div style="overflow-x:auto;background:#f8f9fa;border-radius:8px;border:1px solid var(--gray-200);margin-bottom:20px;">
+      <div style="display:flex;width:100%;min-width:780px;">
+        <div style="width:18%;background:#78909C;color:white;font-size:11px;font-weight:700;text-align:center;padding:6px 2px;">1. 중도인출 신청</div>
+        <div style="width:31.4%;background:#1A5EAF;color:white;font-size:11px;font-weight:700;text-align:center;padding:6px 2px;">2. 서류검토 및 제출</div>
+        <div style="width:27.3%;background:#00838F;color:white;font-size:11px;font-weight:700;text-align:center;padding:6px 2px;">3. 전자결재</div>
+        <div style="width:23.3%;background:#5E35B1;color:white;font-size:11px;font-weight:700;text-align:center;padding:6px 2px;">4. 운용사 지급</div>
+      </div>
+      <svg viewBox="0 0 860 185" xmlns="http://www.w3.org/2000/svg" style="width:100%;min-width:780px;display:block;font-family:'Noto Sans KR',sans-serif;">
+        <defs><marker id="parr1" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto"><path d="M0,0 L0,7 L7,3.5 z" fill="#90A4AE"/></marker></defs>
+        <rect x="0" y="0" width="155" height="185" fill="#ECEFF1" opacity="0.45"/>
+        <rect x="155" y="0" width="270" height="185" fill="#DDEEFF" opacity="0.38"/>
+        <rect x="425" y="0" width="235" height="185" fill="#E0F7F4" opacity="0.38"/>
+        <rect x="660" y="0" width="200" height="185" fill="#EDE7F6" opacity="0.38"/>
+        <rect x="6" y="18" width="82" height="52" rx="5" fill="#C8E6C9" stroke="#66BB6A" stroke-width="1.4"/>
+        <text x="47" y="36" text-anchor="middle" font-size="9" font-weight="bold" fill="#1B5E20">퇴직연금</text>
+        <text x="47" y="48" text-anchor="middle" font-size="9" font-weight="bold" fill="#1B5E20">중도인출</text>
+        <text x="47" y="60" text-anchor="middle" font-size="9" font-weight="bold" fill="#1B5E20">사유확인</text>
+        <rect x="6" y="82" width="82" height="34" rx="5" fill="#C8E6C9" stroke="#66BB6A" stroke-width="1.4"/>
+        <text x="47" y="96" text-anchor="middle" font-size="8.5" fill="#1B5E20">중도인출 가능여부</text>
+        <text x="47" y="108" text-anchor="middle" font-size="8.5" fill="#1B5E20">자가진단</text>
+        <rect x="104" y="28" width="72" height="38" rx="5" fill="#ECEFF1" stroke="#90A4AE" stroke-width="1.4"/>
+        <text x="140" y="44" text-anchor="middle" font-size="9" font-weight="bold" fill="#263238">제출서류</text>
+        <text x="140" y="58" text-anchor="middle" font-size="9" font-weight="bold" fill="#263238">준비</text>
+        <rect x="196" y="24" width="82" height="48" rx="5" fill="#FFF9C4" stroke="#F9A825" stroke-width="1.4"/>
+        <text x="237" y="42" text-anchor="middle" font-size="9" font-weight="bold" fill="#4E3200">서류확인</text>
+        <text x="237" y="56" text-anchor="middle" font-size="8.5" fill="#4E3200">-운용사-</text>
+        <circle cx="237" cy="90" r="11" fill="#FFEBEE" stroke="#EF9A9A" stroke-width="1.3"/>
+        <text x="237" y="93" text-anchor="middle" font-size="8" font-weight="bold" fill="#B71C1C">NO</text>
+        <rect x="196" y="114" width="82" height="36" rx="5" fill="#ECEFF1" stroke="#90A4AE" stroke-width="1.4"/>
+        <text x="237" y="130" text-anchor="middle" font-size="9" font-weight="bold" fill="#263238">서류보완</text>
+        <text x="237" y="143" text-anchor="middle" font-size="8" fill="#90A4AE">↩ 재제출</text>
+        <circle cx="298" cy="34" r="11" fill="#E8F5E9" stroke="#66BB6A" stroke-width="1.3"/>
+        <text x="298" y="38" text-anchor="middle" font-size="8" font-weight="bold" fill="#2E7D32">YES</text>
+        <rect x="322" y="24" width="82" height="48" rx="5" fill="#BBDEFB" stroke="#42A5F5" stroke-width="1.4"/>
+        <text x="363" y="40" text-anchor="middle" font-size="9" font-weight="bold" fill="#0D47A1">원본서류 전달</text>
+        <text x="363" y="54" text-anchor="middle" font-size="8" fill="#1565C0">신청자</text>
+        <text x="363" y="65" text-anchor="middle" font-size="8" fill="#1565C0">→ 페이롤팀</text>
+        <rect x="432" y="24" width="82" height="48" rx="5" fill="#FFF9C4" stroke="#F9A825" stroke-width="1.4"/>
+        <text x="473" y="40" text-anchor="middle" font-size="9" font-weight="bold" fill="#4E3200">신청서</text>
+        <text x="473" y="52" text-anchor="middle" font-size="9" font-weight="bold" fill="#4E3200">직인 날인</text>
+        <text x="473" y="64" text-anchor="middle" font-size="8.5" fill="#4E3200">-페이롤팀-</text>
+        <rect x="535" y="24" width="82" height="48" rx="5" fill="#FFF9C4" stroke="#F9A825" stroke-width="1.4"/>
+        <text x="576" y="44" text-anchor="middle" font-size="9" font-weight="bold" fill="#4E3200">전자결재</text>
+        <text x="576" y="58" text-anchor="middle" font-size="9" font-weight="bold" fill="#4E3200">기안</text>
+        <rect x="664" y="24" width="88" height="48" rx="5" fill="#B2EBF2" stroke="#26C6DA" stroke-width="1.4"/>
+        <text x="708" y="38" text-anchor="middle" font-size="8.5" font-weight="bold" fill="#004D40">원본서류수령</text>
+        <text x="708" y="51" text-anchor="middle" font-size="8.5" font-weight="bold" fill="#004D40">지급결정</text>
+        <text x="708" y="63" text-anchor="middle" font-size="8.5" fill="#1B5E20">운용사</text>
+        <rect x="764" y="24" width="88" height="48" rx="5" fill="#E8EAF6" stroke="#3949AB" stroke-width="1.8"/>
+        <text x="808" y="44" text-anchor="middle" font-size="9.5" font-weight="bold" fill="#1A237E">입금</text>
+        <text x="808" y="58" text-anchor="middle" font-size="8" fill="#3949AB">운용사→개인</text>
+        <line x1="88" y1="48" x2="102" y2="48" stroke="#90A4AE" stroke-width="1.3" marker-end="url(#parr1)"/>
+        <line x1="176" y1="48" x2="194" y2="48" stroke="#90A4AE" stroke-width="1.3" marker-end="url(#parr1)"/>
+        <line x1="278" y1="48" x2="320" y2="48" stroke="#90A4AE" stroke-width="1.3" stroke-dasharray="3,2" marker-end="url(#parr1)"/>
+        <line x1="220" y1="72" x2="220" y2="109" stroke="#90A4AE" stroke-width="1.3" stroke-dasharray="3,2" marker-end="url(#parr1)"/>
+        <line x1="404" y1="48" x2="430" y2="48" stroke="#90A4AE" stroke-width="1.3" marker-end="url(#parr1)"/>
+        <line x1="514" y1="48" x2="533" y2="48" stroke="#90A4AE" stroke-width="1.3" marker-end="url(#parr1)"/>
+        <line x1="617" y1="48" x2="662" y2="48" stroke="#90A4AE" stroke-width="1.3" marker-end="url(#parr1)"/>
+        <line x1="752" y1="48" x2="762" y2="48" stroke="#90A4AE" stroke-width="1.3" stroke-dasharray="3,2" marker-end="url(#parr1)"/>
+      </svg>
+    </div>
+    <div style="height:3px;background:linear-gradient(90deg,#546E7A,#1A5EAF,#00838F);border-radius:2px;margin:4px 0 20px;"></div>
+    <!-- 퇴직금 -->
+    <p style="font-size:13px;font-weight:700;color:#2E7D32;margin-bottom:8px;">💼 퇴직금 (퇴직연금 미가입자)</p>
+    <div style="overflow-x:auto;background:#f8f9fa;border-radius:8px;border:1px solid var(--gray-200);padding:10px 10px 6px;">
+      <div style="display:flex;width:100%;min-width:780px;">
+        <div style="width:18%;background:#78909C;color:white;font-size:11px;font-weight:700;text-align:center;padding:6px 2px;">1. 중도인출 신청</div>
+        <div style="width:18%;background:#1A5EAF;color:white;font-size:11px;font-weight:700;text-align:center;padding:6px 2px;">2. 서류검토</div>
+        <div style="width:18%;background:#00838F;color:white;font-size:11px;font-weight:700;text-align:center;padding:6px 2px;">3. 전자결재</div>
+        <div style="width:23%;background:#5E35B1;color:white;font-size:11px;font-weight:700;text-align:center;padding:6px 2px;">4. 서류제출</div>
+        <div style="width:23%;background:#1A237E;color:white;font-size:11px;font-weight:700;text-align:center;padding:6px 2px;">5. 회사 지급</div>
+      </div>
+      <svg viewBox="0 0 860 185" xmlns="http://www.w3.org/2000/svg" style="width:100%;min-width:780px;display:block;font-family:'Noto Sans KR',sans-serif;">
+        <defs><marker id="parr2" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto"><path d="M0,0 L0,7 L7,3.5 z" fill="#90A4AE"/></marker></defs>
+        <rect x="0" y="0" width="155" height="185" fill="#ECEFF1" opacity="0.45"/>
+        <rect x="155" y="0" width="155" height="185" fill="#DDEEFF" opacity="0.38"/>
+        <rect x="310" y="0" width="155" height="185" fill="#E0F7F4" opacity="0.38"/>
+        <rect x="465" y="0" width="195" height="185" fill="#EDE7F6" opacity="0.38"/>
+        <rect x="660" y="0" width="200" height="185" fill="#E8EAF6" opacity="0.38"/>
+        <rect x="6" y="18" width="82" height="52" rx="5" fill="#C8E6C9" stroke="#66BB6A" stroke-width="1.4"/>
+        <text x="47" y="36" text-anchor="middle" font-size="9" font-weight="bold" fill="#1B5E20">퇴직금</text>
+        <text x="47" y="48" text-anchor="middle" font-size="9" font-weight="bold" fill="#1B5E20">중도인출</text>
+        <text x="47" y="60" text-anchor="middle" font-size="9" font-weight="bold" fill="#1B5E20">사유확인</text>
+        <rect x="6" y="82" width="82" height="34" rx="5" fill="#C8E6C9" stroke="#66BB6A" stroke-width="1.4"/>
+        <text x="47" y="96" text-anchor="middle" font-size="8.5" fill="#1B5E20">중도인출 가능여부</text>
+        <text x="47" y="108" text-anchor="middle" font-size="8.5" fill="#1B5E20">자가진단</text>
+        <rect x="104" y="28" width="72" height="38" rx="5" fill="#ECEFF1" stroke="#90A4AE" stroke-width="1.4"/>
+        <text x="140" y="44" text-anchor="middle" font-size="9" font-weight="bold" fill="#263238">제출서류</text>
+        <text x="140" y="58" text-anchor="middle" font-size="9" font-weight="bold" fill="#263238">준비</text>
+        <rect x="196" y="24" width="82" height="48" rx="5" fill="#FFF9C4" stroke="#F9A825" stroke-width="1.4"/>
+        <text x="237" y="42" text-anchor="middle" font-size="9" font-weight="bold" fill="#4E3200">서류확인</text>
+        <text x="237" y="56" text-anchor="middle" font-size="8.5" fill="#4E3200">-페이롤팀-</text>
+        <circle cx="237" cy="90" r="11" fill="#FFEBEE" stroke="#EF9A9A" stroke-width="1.3"/>
+        <text x="237" y="94" text-anchor="middle" font-size="8" font-weight="bold" fill="#B71C1C">NO</text>
+        <rect x="196" y="114" width="82" height="36" rx="5" fill="#ECEFF1" stroke="#90A4AE" stroke-width="1.4"/>
+        <text x="237" y="130" text-anchor="middle" font-size="9" font-weight="bold" fill="#263238">서류보완</text>
+        <text x="237" y="143" text-anchor="middle" font-size="8" fill="#90A4AE">↩ 재제출</text>
+        <circle cx="298" cy="34" r="11" fill="#E8F5E9" stroke="#66BB6A" stroke-width="1.3"/>
+        <text x="298" y="38" text-anchor="middle" font-size="8" font-weight="bold" fill="#2E7D32">YES</text>
+        <rect x="322" y="24" width="82" height="48" rx="5" fill="#FFF9C4" stroke="#F9A825" stroke-width="1.4"/>
+        <text x="363" y="44" text-anchor="middle" font-size="9" font-weight="bold" fill="#4E3200">전자결재</text>
+        <text x="363" y="58" text-anchor="middle" font-size="9" font-weight="bold" fill="#4E3200">기안</text>
+        <rect x="470" y="24" width="88" height="48" rx="5" fill="#BBDEFB" stroke="#42A5F5" stroke-width="1.4"/>
+        <text x="514" y="40" text-anchor="middle" font-size="9" font-weight="bold" fill="#0D47A1">원본서류 전달</text>
+        <text x="514" y="54" text-anchor="middle" font-size="8" fill="#1565C0">신청자</text>
+        <text x="514" y="65" text-anchor="middle" font-size="8" fill="#1565C0">→ 페이롤팀</text>
+        <rect x="566" y="24" width="88" height="48" rx="5" fill="#ECEFF1" stroke="#90A4AE" stroke-width="1.4"/>
+        <text x="610" y="38" text-anchor="middle" font-size="8.5" font-weight="bold" fill="#263238">원본서류수령</text>
+        <text x="610" y="51" text-anchor="middle" font-size="8.5" font-weight="bold" fill="#263238">지급결정</text>
+        <text x="610" y="63" text-anchor="middle" font-size="8.5" fill="#1565C0">페이롤팀</text>
+        <rect x="666" y="24" width="88" height="48" rx="5" fill="#ECEFF1" stroke="#546E7A" stroke-width="1.8"/>
+        <text x="710" y="44" text-anchor="middle" font-size="9.5" font-weight="bold" fill="#263238">입금</text>
+        <text x="710" y="58" text-anchor="middle" font-size="8" fill="#1565C0">페이롤팀→개인</text>
+        <line x1="88" y1="48" x2="102" y2="48" stroke="#90A4AE" stroke-width="1.3" marker-end="url(#parr2)"/>
+        <line x1="176" y1="48" x2="194" y2="48" stroke="#90A4AE" stroke-width="1.3" marker-end="url(#parr2)"/>
+        <line x1="278" y1="48" x2="320" y2="48" stroke="#90A4AE" stroke-width="1.3" stroke-dasharray="3,2" marker-end="url(#parr2)"/>
+        <line x1="220" y1="72" x2="220" y2="109" stroke="#90A4AE" stroke-width="1.3" stroke-dasharray="3,2" marker-end="url(#parr2)"/>
+        <line x1="404" y1="48" x2="468" y2="48" stroke="#90A4AE" stroke-width="1.3" marker-end="url(#parr2)"/>
+        <line x1="558" y1="48" x2="564" y2="48" stroke="#90A4AE" stroke-width="1.3" stroke-dasharray="3,2" marker-end="url(#parr2)"/>
+        <line x1="654" y1="48" x2="664" y2="48" stroke="#90A4AE" stroke-width="1.3" stroke-dasharray="3,2" marker-end="url(#parr2)"/>
+      </svg>
+    </div>
+  </div>
+</div>
+
 </div>
 
 <!-- 모달 -->
 <div class="modal-overlay" id="modal-overlay" onclick="overlayClick(event)">
-  <div class="modal-sheet" id="modal-sheet">
-
-    <div class="sheet-header">
-      <div class="sheet-top">
-        <div class="sheet-title" id="sheet-title"></div>
-        <button class="close-btn" onclick="closeModal()">✕</button>
+  <div class="modal-sheet">
+    <div class="modal-header">
+      <div class="modal-title-txt" id="modal-title"></div>
+      <button class="modal-close" onclick="closeModal()">✕</button>
+    </div>
+    <div class="modal-prog">
+      <div class="prog-meta">
+        <span class="prog-step-lbl" id="prog-label"></span>
+        <span class="prog-section-lbl" id="prog-section"></span>
       </div>
+      <div class="prog-track"><div class="prog-fill" id="prog-fill" style="width:0%"></div></div>
     </div>
-
-    <div class="progress-wrap">
-      <div class="progress-meta">
-        <span class="progress-step" id="prog-label"></span>
-        <span class="progress-section" id="prog-section"></span>
-      </div>
-      <div class="progress-track">
-        <div class="progress-fill" id="prog-fill" style="width:0%"></div>
-      </div>
+    <div class="modal-qarea" id="q-area">
+      <div class="modal-qtext" id="q-text"></div>
+      <div class="modal-qdesc" id="q-desc" style="display:none"></div>
     </div>
-
-    <div class="question-area" id="question-area">
-      <div class="question-text" id="q-text"></div>
-      <div class="question-desc" id="q-desc" style="display:none"></div>
+    <div class="modal-btns" id="btn-area">
+      <button class="mbtn mbtn-yes" id="btn-yes" onclick="answer(true)">예</button>
+      <button class="mbtn mbtn-no" id="btn-no" onclick="answer(false)">아니오</button>
     </div>
-
-    <div class="btn-area" id="btn-area">
-      <button class="btn btn-yes" id="btn-yes" onclick="answer(true)">예</button>
-      <button class="btn btn-no"  id="btn-no"  onclick="answer(false)">아니오</button>
-    </div>
-    <button class="back-btn" id="back-btn" onclick="goBack()">← 이전으로</button>
-
+    <button class="modal-back" id="back-btn" onclick="goBack()">← 이전으로</button>
     <div id="result-area"></div>
     <div id="history-area"></div>
-
   </div>
 </div>
 
 <script>
+function openOutlook(email) {
+  const url = `https://outlook.office.com/mail/deeplink/compose?to=${encodeURIComponent(email)}&subject=${encodeURIComponent('퇴직연금 중도인출 문의')}`;
+  window.open(url, '_blank');
+}
+
+function switchPhase(idx, el) {
+  document.querySelectorAll('.phase-tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.phase-content').forEach(c => c.classList.remove('active'));
+  el.classList.add('active');
+  document.getElementById('phase-' + idx).classList.add('active');
+}
+function openProcessPopup() {
+  document.getElementById('processPopup').classList.add('active');
+}
+function closeProcessPopup(e) {
+  if (e.target === document.getElementById('processPopup')) {
+    document.getElementById('processPopup').classList.remove('active');
+  }
+}
+function downloadAll() {
+  const files = [
+    { href: '퇴직연금_중간정산_신청서.pdf',     name: '퇴직연금_중간정산_신청서.pdf' },
+    { href: '퇴직연금_중간정산_신청_안내문.pdf', name: '퇴직연금_중간정산_신청_안내문.pdf' },
+    { href: '지방세_세목별_과세증명서_샘플.pdf', name: '지방세_세목별_과세증명서_샘플.pdf' }
+  ];
+  files.forEach((file, i) => {
+    setTimeout(() => {
+      const a = document.createElement('a');
+      a.href = file.href;
+      a.download = file.name;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+    }, i * 400); // 400ms 간격으로 순차 다운로드 (브라우저 차단 방지)
+  });
+}
+
+function switchPage(id, el) {
+  document.querySelectorAll('.sidebar-item').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.page-body').forEach(b => b.classList.remove('active'));
+  el.classList.add('active');
+  document.getElementById('tab-' + id).classList.add('active');
+  document.querySelector('.main-content').scrollTo({ top: 0, behavior: 'instant' });
+}
+
+const OK_BODY = `증빙자료는 PDF 파일로 취합하여 담당 법인 페이롤팀으로 메일 첨부하여 주시기 바랍니다.`;
+const NG_CONTACT = `추가 문의 사항은 각 법인 담당 페이롤팀으로 문의 메일 주시기 바랍니다.`;
+
 const flows = {
   house: {
-    title: "무주택자 주택구입",
+    title: "🏠 무주택자 주택구입",
     steps: [
       {
-        section: "기본 요건",
-        q: "현재 무주택자인가요?",
-        desc: "신청일 기준으로 무주택자여야 합니다. 과거에 주택을 소유한 이력이 있어도 현재 무주택이면 가능합니다.",
-        yes: 1, no: { type:"ng", title:"무주택자 요건 미충족", body:"현재 주택을 소유하고 있다면 이 사유로 중도인출이 불가합니다.\n(단, 보유 주택을 매도하고 새 주택을 구입하는 날이 동일한 경우도 불가)" }
-      },
-      {
         section: "명의 확인",
-        q: "본인 명의로 주택을 구입하나요?",
-        desc: "배우자 또는 가족 명의 구입은 해당되지 않습니다.",
-        yes: 2, no: { type:"ng", title:"명의 요건 미충족", body:"퇴직금 중간정산·퇴직연금 중도인출은 본인 명의 주택 구입에 한합니다." }
+        q: "본인 명의 계약 건인가요?",
+        desc: "※ 배우자 공동 명의도 가능",
+        yes: 1,
+        no: { type:"ng", title:"중도인출 진행이 불가합니다.", body:`• 본인 또는 배우자 공동 명의 외 계약 건은 중도인출 진행이 불가합니다.\n• ${NG_CONTACT}` }
       },
       {
-        section: "중복 신청 여부",
-        q: "이 사업장(회사)에서 전세/보증금 사유로 중도인출을 받은 적이 있나요?",
-        desc: "전세금·보증금 목적 인출은 동일 사업장에서 1회만 가능합니다. 주택 구입은 횟수 제한 없음.",
-        yes: { type:"warn", title:"전세금 사유 이미 사용", body:"전세금/보증금 사유는 1회로 한정됩니다. 단, 주택 구입 목적이라면 별도이므로 다음 단계로 진행 가능합니다.\n인사팀 또는 퇴직연금 사업자에게 확인해 주세요." },
+        section: "무주택 확인",
+        q: "신청일 기준 무주택자인가요?",
+        desc: "",
+        yes: 2,
+        no: 5
+      },
+      {
+        section: "지방세 납부 이력",
+        q: "당해연도 주택, 부동산에 대한 지방세 납부 이력이 있으신가요?",
+        desc: "※ 지방세세목별 과세증명서 기준",
+        yes: { type:"ng", title:"중도인출 진행이 불가합니다.", body:`• 주택, 부동산을 보유 중일 경우 중도인출 진행이 불가합니다.\n• ${NG_CONTACT}` },
         no: 3
       },
       {
-        section: "신청 시기",
-        q: "소유권 이전 등기일(계약 체결일) 기준 3개월 이내인가요?",
-        desc: "주택 구입의 경우 잔금 지급일 또는 소유권 이전 등기일로부터 3개월 이내 신청해야 합니다.",
-        yes: { type:"ok", title:"중도인출 신청 가능", body:"모든 요건을 충족합니다!\n\n필요 서류: 매매계약서, 등기사항전부증명서(등기부등본), 무주택 확인서류(주민등록등본)\n\n퇴직연금 사업자에 서류를 제출하여 신청하세요.\n\n※ 주택 구입 사유 인출 시 퇴직소득세율 100%가 적용됩니다." },
-        no: { type:"ng", title:"신청 기한 초과", body:"소유권 이전 등기 후 3개월이 경과하면 이 사유로 신청이 불가합니다.\n다른 중도인출 사유(요양 등)에 해당하는지 확인해 보세요." }
+        section: "계약금 납부 확인",
+        q: "계약서 작성 후 계약금 납부가 완료되었나요?",
+        desc: "",
+        yes: 4,
+        no: { type:"ng", title:"중도인출 진행이 불가합니다.", body:`• 계약금을 완납하지 않았을 경우 중도인출 진행이 불가합니다.\n• ${NG_CONTACT}` }
+      },
+      {
+        section: "신청 기간 확인",
+        q: "주택 매매 체결일부터 소유권 이전 등기 완료 후 1개월 이내 건인가요?",
+        desc: "",
+        yes: { type:"ok", title:"중도인출 진행이 가능합니다.", body:`DOCS_LINK\n${OK_BODY}` },
+        no: { type:"ng", title:"중도인출 진행이 불가합니다.", body:`• 소유권 이전 등기완료 후 1개월이 초과하였다면 중도인출 진행이 불가합니다.\n• ${NG_CONTACT}` }
+      },
+      // step 5: 무주택자 아니오 분기 (주택 소유 → 매도 완료 여부)
+      {
+        section: "매도 처리 확인",
+        q: "현재 소유하신 주택에 대해 매도 처리가 완료되었나요?",
+        desc: "",
+        yes: 3,
+        no: { type:"ng", title:"중도인출 진행이 불가합니다.", body:`• 주택, 부동산을 보유 중일 경우 중도인출 진행이 불가합니다.\n• ${NG_CONTACT}` }
+      }
+    ]
+  },
+
+  jeonse: {
+    title: "🔑 전(월)세자금",
+    steps: [
+      {
+        section: "명의 확인",
+        q: "본인 명의 계약 건인가요?",
+        desc: "※ 배우자 단독 or 공동 명의 계약도 가능",
+        yes: 1,
+        no: { type:"ng", title:"중도인출 진행이 불가합니다.", body:`• 본인, 배우자 외 타인 명의 계약 건은 중도인출 진행이 불가합니다.\n• ${NG_CONTACT}` }
+      },
+      {
+        section: "중복 신청 확인",
+        q: "전세자금 사유로 중도인출 받으신 이력이 있나요?",
+        desc: "※ 동일 사업장 내 1회 제한",
+        yes: { type:"ng", title:"중도인출 진행이 불가합니다.", body:`• 전세자금 사유는 동일 사업장 내 1회로 제한됩니다.\n• ${NG_CONTACT}` },
+        no: 2
+      },
+      {
+        section: "전입신고 가능 여부",
+        q: "전입신고가 가능한 곳인가요?",
+        desc: "",
+        yes: 3,
+        no: { type:"ng", title:"중도인출 진행이 불가합니다.", body:`• 전입신고가 불가한 주소지는 중도인출 진행이 불가합니다.\n• ${NG_CONTACT}` }
+      },
+      {
+        section: "무주택 확인",
+        q: "신청일 기준 무주택자인가요?",
+        desc: "",
+        yes: 4,
+        no: 7
+      },
+      {
+        section: "지방세 납부 이력",
+        q: "당해연도 주택, 부동산에 대한 지방세 납부 이력이 있으신가요?",
+        desc: "※ 지방세세목별 과세증명서 기준",
+        yes: { type:"ng", title:"중도인출 진행이 불가합니다.", body:`• 주택, 부동산을 보유 중일 경우 중도인출 진행이 불가합니다.\n• ${NG_CONTACT}` },
+        no: 5
+      },
+      {
+        section: "계약금 납부 확인",
+        q: "계약서 작성 후 계약금 납부가 완료되었나요?",
+        desc: "",
+        yes: 6,
+        no: { type:"ng", title:"중도인출 진행이 불가합니다.", body:`• 계약금을 완납하지 않았을 경우 중도인출 진행이 불가합니다.\n• ${NG_CONTACT}` }
+      },
+      {
+        section: "신청 기간 확인",
+        q: "잔금일로부터 1개월 이내로 신청 가능한가요?",
+        desc: "",
+        yes: { type:"ok", title:"중도인출 진행이 가능합니다.", body:`DOCS_LINK\n${OK_BODY}` },
+        no: { type:"ng", title:"중도인출 진행이 불가합니다.", body:`• 잔금일로부터 1개월이 초과되었을 경우 중도인출 진행이 불가합니다.\n• ${NG_CONTACT}` }
+      },
+      // step 7: 무주택자 아니오 분기
+      {
+        section: "매도 처리 확인",
+        q: "현재 소유하신 주택에 대해 매도 처리가 완료되었나요?",
+        desc: "",
+        yes: 5,
+        no: { type:"ng", title:"중도인출 진행이 불가합니다.", body:`• 무주택자 요건 미충족으로 중도인출 진행이 불가합니다.\n• ${NG_CONTACT}` }
       }
     ]
   },
 
   medical: {
-    title: "6개월 이상 요양 의료비",
+    title: "🏥 6개월 이상 요양 (의료비)",
     steps: [
       {
-        section: "가입 여부",
-        q: "퇴직연금(DC형 / IRP) 또는 퇴직금 제도에 가입되어 있나요?",
-        desc: "회사 인사팀 또는 급여명세서를 통해 가입 제도를 확인할 수 있습니다.",
-        yes: 1, no: { type:"ng", title:"퇴직급여 미가입", body:"퇴직급여 제도에 가입되어 있지 않으면 중간정산·중도인출 신청이 불가합니다.\n먼저 회사 인사팀에 가입 여부를 확인해 주세요." }
+        section: "대상자 확인",
+        q: "가입자, 배우자 또는 생계를 같이하는 부양가족 건인가요?",
+        desc: "√ 부양가족 범위\n1) 만60세 이상 직계존속\n2) 만20세 이하의 직계비속 또는 동거 입양자\n3) 만20세 이하 또는 만60세 이상인 형제자매\n4) 장애인(나이 불문, 입증서류 추가 제출)",
+        yes: 1,
+        no: { type:"ng", title:"중도인출 진행이 불가합니다.", body:`• 대상자 요건을 미충족할 경우 중도인출 진행이 불가합니다.\n• ${NG_CONTACT}` }
       },
       {
-        section: "제도 유형",
-        q: "가입 제도가 DB형(확정급여형) 퇴직연금 단독인가요?",
-        desc: "DB형만 가입된 경우 중도인출이 불가합니다. DC형 또는 IRP가 있다면 '아니오'를 선택하세요.",
-        yes: { type:"ng", title:"DB형 단독 — 중도인출 불가", body:"DB형 퇴직연금은 법적으로 중도인출이 불가합니다.\n\n대안:\n① 법정 사유 충족 시 담보대출 가능\n② 원하면 DC형으로 전환 후 인출 가능 (회사 동의 필요)\n\n인사팀에 DC형 전환 가능 여부를 문의하세요." },
-        no: 2
+        section: "요양 기간 확인",
+        q: "6개월 이상 요양에 해당하며, 요양 종료 후 1개월 이내 신청 건인가요?",
+        desc: "※ 진단서 내 '6개월 이상 요양 or 치료 or 투약 필요' 문구 필수 기재",
+        yes: 2,
+        no: { type:"ng", title:"중도인출 진행이 불가합니다.", body:`• 신청 가능 기간 요건을 미충족할 경우 중도인출 진행이 불가합니다.\n• ${NG_CONTACT}` }
       },
       {
-        section: "요양 대상자",
-        q: "요양이 필요한 분이 본인·배우자·부양가족에 해당하나요?",
-        desc: "부양가족 범위:\n• 60세 이상 직계존속\n• 20세 이하 직계비속·동거 입양자\n• 20세 이하 또는 60세 이상 형제자매\n• 기초생활수급자\n• 가정위탁 아동",
-        yes: 3, no: { type:"ng", title:"대상자 요건 미충족", body:"중도인출 가능 요양 대상자는 본인, 배우자, 법정 부양가족으로 한정됩니다.\n해당 관계가 아니라면 이 사유로는 신청이 어렵습니다." }
+        section: "의료비 기준 확인",
+        q: "본인이 부담하는 의료비가 연간 임금총액의 12.5%를 초과하나요?",
+        desc: "√ 의료비: 신청일로부터 역산하여 1년동안 납입한 본인 부담금 기준\n√ 임금총액: 전년도 근로소득원천징수영수증(16번) 기준",
+        yes: { type:"ok", title:"중도인출 진행이 가능합니다.", body:`DOCS_LINK\n${OK_BODY}` },
+        no: { type:"ng", title:"중도인출 진행이 불가합니다.", body:`• 의료비 납입 금액 기준 미달일 경우 중도인출 진행이 불가합니다.\n• ${NG_CONTACT}` }
+      }
+    ]
+  },
+
+  recovery: {
+    title: "⚖️ 개인회생",
+    steps: [
+      {
+        section: "결정문 확인",
+        q: "법원 개인회생개시결정문이 있나요?",
+        desc: "신용회복위원회 개인워크아웃·프리워크아웃은 해당되지 않습니다.",
+        yes: 1,
+        no: { type:"ng", title:"중도인출 진행이 불가합니다.", body:`• 법원의 개인회생개시결정문이 없을 경우 중도인출 진행이 불가합니다.\n• ${NG_CONTACT}` }
       },
       {
-        section: "요양 기간",
-        q: "의사로부터 6개월 이상 요양이 필요하다는 진단을 받았나요?",
-        desc: "진단서 또는 소견서에 요양 기간이 명시되어야 합니다. 6개월 미만이면 해당 사유로 신청 불가입니다.",
-        yes: 4, no: { type:"ng", title:"요양 기간 미충족", body:"요양 기간이 6개월 미만이면 이 사유로는 중도인출이 불가합니다.\n다른 중도인출 사유(주택 구입, 파산 등)에 해당하는지 확인해 보세요." }
+        section: "변제 기간 확인",
+        q: "개인회생 변제 기간 중인가요?",
+        desc: "",
+        yes: 2,
+        no: { type:"ng", title:"중도인출 진행이 불가합니다.", body:`• 면책 또는 폐지가 결정된 후는 중도인출 진행이 불가합니다.\n• ${NG_CONTACT}` }
       },
       {
-        section: "질병·부상 여부",
-        q: "요양 원인이 질병 또는 부상인가요?",
-        desc: "단순 건강검진, 미용·성형 목적, 예방적 치료 등은 해당하지 않습니다.",
-        yes: 5, no: { type:"ng", title:"질병·부상 요건 미충족", body:"질병 또는 부상으로 인한 요양이 아닌 경우 이 사유로 중도인출이 불가합니다." }
+        section: "신청 기간 확인",
+        q: "중간정산 신청일로부터 역산하여 5년 이내 건인가요?",
+        desc: "",
+        yes: { type:"ok", title:"중도인출 진행이 가능합니다.", body:`DOCS_LINK\n${OK_BODY}` },
+        no: { type:"ng", title:"중도인출 진행이 불가합니다.", body:`• 개시결정이 있어도 5년이 초과되었을 경우 중도인출 진행이 불가합니다.\n• ${NG_CONTACT}` }
+      }
+    ]
+  },
+
+  bankrupt: {
+    title: "🏛️ 파산선고",
+    steps: [
+      {
+        section: "결정문 확인",
+        q: "개인파산선고결정문이 있나요?",
+        desc: "법원의 파산선고 결정문이어야 합니다.",
+        yes: 1,
+        no: { type:"ng", title:"중도인출 진행이 불가합니다.", body:`• 법원의 파산선고결정문이 없을 경우 중도인출 진행이 불가합니다.\n• ${NG_CONTACT}` }
       },
       {
-        section: "제도 유형 확인",
-        q: "가입하신 제도가 개인형 IRP인가요?",
-        desc: "개인형 IRP는 의료비 금액 기준 없이 신청 가능합니다.\nDC형·기업형 IRP는 다음 단계에서 의료비 기준을 확인합니다.",
-        yes: 7, no: 6
+        section: "신청 기간 확인",
+        q: "중간정산 신청일로부터 역산하여 5년 이내 건인가요?",
+        desc: "",
+        yes: { type:"ok", title:"중도인출 진행이 가능합니다.", body:`DOCS_LINK\n${OK_BODY}` },
+        no: { type:"ng", title:"중도인출 진행이 불가합니다.", body:`• 신청일로부터 5년이 초과되었을 경우 중도인출 진행이 불가합니다.\n• ${NG_CONTACT}` }
+      }
+    ]
+  },
+
+  disaster: {
+    title: "🌪️ 천재지변",
+    steps: [
+      {
+        section: "재난 피해 확인",
+        q: "[재난 및 안전관리 기본법]에 따른 특별재난지역 선포 등으로 피해를 입었나요?",
+        desc: "",
+        yes: 1,
+        no: { type:"ng", title:"중도인출 진행이 불가합니다.", body:`• 재난 및 안전관리 기본법에 따른 피해가 아닐 경우 중도인출 진행이 불가합니다.\n• ${NG_CONTACT}` }
       },
       {
-        section: "의료비 요건 (DC형·기업형IRP)",
-        q: "해당 의료비가 본인 연간 임금총액의 12.5%(1/8)를 초과하나요?",
-        desc: "예) 연봉 4,000만원이면 의료비가 500만원을 초과해야 합니다.\n연간 임금총액은 직전년도 임금 총액 기준입니다.",
-        yes: 7, no: { type:"ng", title:"의료비 요건 미충족", body:"DC형·기업형IRP는 의료비가 연간 임금총액의 12.5%를 초과해야 중도인출이 가능합니다.\n\n개인형 IRP는 이 요건이 없으므로, 추가 IRP 계좌 개설도 고려해 볼 수 있습니다." }
+        section: "재난피해사실확인서",
+        q: "지방자치단체에서 발급한 '재난피해사실확인서'가 있나요?",
+        desc: "",
+        yes: 2,
+        no: { type:"ng", title:"중도인출 진행이 불가합니다.", body:`• 재난피해사실확인서가 없을 경우 중도인출 진행이 불가합니다.\n• ${NG_CONTACT}` }
       },
       {
-        section: "신청 시기 및 서류",
-        q: "요양 종료일 이후 1개월 이내에 신청하실 수 있나요?",
-        desc: "요양 사유 확인이 가능한 날부터, 요양 종료일 이후 1개월 이내에 신청해야 합니다.\n요양 중에도 신청 가능합니다.",
-        yes: { type:"ok", title:"중도인출 신청 가능", body:"모든 요건을 충족합니다!\n\n필요 서류:\n• 진단서 또는 장기요양 소견서\n• 가족관계증명서 (배우자·부양가족인 경우)\n• 의료비 영수증\n\n퇴직연금 사업자에 서류를 제출하여 신청하세요.\n\n※ 장기요양 사유 인출 시 연금소득세(3.3~5.5%) 적용으로 일반 인출보다 세 부담이 낮습니다." },
-        no: { type:"warn", title:"신청 시기 확인 필요", body:"요양 종료 후 1개월이 경과했을 수 있습니다.\n정확한 신청 가능 기간을 퇴직연금 사업자(은행·증권사)에 문의해 주세요." }
+        section: "신청 기간 확인",
+        q: "재난으로 인한 피해일(또는 특별재난지역 선포일)로부터 3개월 이내인가요?",
+        desc: "※ 단, 실종의 경우 최대 1년 이내 신청 가능",
+        yes: { type:"ok", title:"중도인출 진행이 가능합니다.", body:`DOCS_LINK\n${OK_BODY}` },
+        no: { type:"ng", title:"중도인출 진행이 불가합니다.", body:`• 피해일로부터 3개월이 초과되었을 경우 중도인출 진행이 불가합니다.\n• ${NG_CONTACT}` }
       }
     ]
   }
 };
 
-let currentFlow = null;
-let currentStep = 0;
-let answered = [];
+let currentFlow = null, currentStep = 0, answered = [];
 
 function openModal(type) {
-  currentFlow = flows[type];
-  currentStep = 0;
-  answered = [];
-  document.getElementById('sheet-title').textContent = currentFlow.title;
+  currentFlow = flows[type]; currentStep = 0; answered = [];
+  document.getElementById('modal-title').textContent = currentFlow.title;
   document.getElementById('modal-overlay').classList.add('active');
   document.getElementById('result-area').innerHTML = '';
   document.getElementById('history-area').innerHTML = '';
   renderStep();
 }
-
-function closeModal() {
-  document.getElementById('modal-overlay').classList.remove('active');
-}
-
-function overlayClick(e) {
-  if (e.target === document.getElementById('modal-overlay')) closeModal();
-}
+function closeModal() { document.getElementById('modal-overlay').classList.remove('active'); }
+function overlayClick(e) { if (e.target === document.getElementById('modal-overlay')) closeModal(); }
 
 function renderStep() {
-  const steps = currentFlow.steps;
-  const s = steps[currentStep];
-  const total = steps.length;
-  const pct = Math.round((currentStep / total) * 100);
-
-  document.getElementById('prog-label').textContent = `질문 ${currentStep + 1} / ${total}`;
+  const s = currentFlow.steps[currentStep];
+  const total = currentFlow.steps.length;
+  document.getElementById('prog-label').textContent = `질문 ${currentStep+1} / ${total}`;
   document.getElementById('prog-section').textContent = s.section;
-  document.getElementById('prog-fill').style.width = pct + '%';
-
+  document.getElementById('prog-fill').style.width = Math.round((currentStep/total)*100) + '%';
   document.getElementById('q-text').textContent = s.q;
-  const descEl = document.getElementById('q-desc');
-  if (s.desc) {
-    descEl.style.display = 'block';
-    descEl.innerHTML = s.desc.replace(/\n/g, '<br>');
-  } else {
-    descEl.style.display = 'none';
-  }
-
-  document.getElementById('question-area').style.display = 'block';
+  const d = document.getElementById('q-desc');
+  if (s.desc) { d.style.display='block'; d.innerHTML=s.desc.replace(/\n/g,'<br>'); } else { d.style.display='none'; }
+  document.getElementById('q-area').style.display = 'block';
   document.getElementById('btn-area').style.display = 'flex';
   document.getElementById('btn-yes').disabled = false;
   document.getElementById('btn-no').disabled = false;
   document.getElementById('result-area').innerHTML = '';
-
-  const backBtn = document.getElementById('back-btn');
-  backBtn.style.display = 'block';
-  backBtn.disabled = answered.length === 0;
+  const bb = document.getElementById('back-btn');
+  bb.style.display = 'block'; bb.disabled = answered.length === 0;
 }
 
 function answer(yes) {
   const s = currentFlow.steps[currentStep];
   answered.push({ q: s.q, a: yes, stepIndex: currentStep });
-
   const next = yes ? s.yes : s.no;
-
-  if (typeof next === 'object') {
-    showResult(next);
-  } else {
-    currentStep = next;
-    renderStep();
-  }
+  if (typeof next === 'object') showResult(next);
+  else { currentStep = next; renderStep(); }
   renderHistory();
 }
 
 function goBack() {
-  if (answered.length === 0) return;
+  if (!answered.length) return;
   const last = answered.pop();
   currentStep = last.stepIndex;
   document.getElementById('result-area').innerHTML = '';
-  renderStep();
-  renderHistory();
+  renderStep(); renderHistory();
 }
 
 function showResult(r) {
   document.getElementById('prog-fill').style.width = '100%';
   document.getElementById('prog-label').textContent = '완료';
   document.getElementById('prog-section').textContent = '결과';
-
-  document.getElementById('question-area').style.display = 'none';
+  document.getElementById('q-area').style.display = 'none';
   document.getElementById('btn-area').style.display = 'none';
   document.getElementById('back-btn').style.display = 'none';
+  const icons = { ok:'✅', ng:'❌', warn:'⚠️' };
 
-  const icons = { ok: '✅', ng: '❌', warn: '⚠️' };
-  const html = `
+  const docsLink = `<a href="#" onclick="openDocsPage(); return false;" style="color:var(--blue-mid);font-weight:700;text-decoration:underline;">여기</a>`;
+  const bodyHtml = r.body
+    .replace('DOCS_LINK', `• (${docsLink})를 클릭하여 증빙 서류를 확인하여 주세요.`)
+    .replace(/\n/g, '<br>');
+
+  document.getElementById('result-area').innerHTML = `
     <div class="result-card ${r.type}">
       <div class="result-icon">${icons[r.type]}</div>
       <div class="result-title">${r.title}</div>
-      <div class="result-body">${r.body.replace(/\n/g,'<br>')}</div>
+      <div class="result-body">${bodyHtml}</div>
     </div>
-    <button class="back-btn" style="display:block" onclick="goBack()">← 이전으로</button>
-    <button class="restart-btn" onclick="restart()">↺ 처음부터 다시하기</button>
-  `;
-  document.getElementById('result-area').innerHTML = html;
+    <button class="modal-back" style="display:block" onclick="goBack()">← 이전으로</button>
+    <button class="modal-restart" onclick="restartModal()">↺ 처음부터 다시하기</button>`;
 }
 
-function restart() {
-  currentStep = 0;
-  answered = [];
-  document.getElementById('result-area').innerHTML = '';
-  document.getElementById('history-area').innerHTML = '';
+function openDocsPage() {
+  closeModal();
+  const w = window.open('', '_blank');
+  w.document.write(document.documentElement.outerHTML);
+  w.document.close();
+  setTimeout(() => {
+    try {
+      const items = w.document.querySelectorAll('.sidebar-item');
+      const bodies = w.document.querySelectorAll('.page-body');
+      items.forEach(i => i.classList.remove('active'));
+      bodies.forEach(b => b.classList.remove('active'));
+      items[2].classList.add('active');
+      w.document.getElementById('tab-docs').classList.add('active');
+    } catch(e) {}
+  }, 300);
+}
+
+function restartModal() {
+  currentStep=0; answered=[];
+  document.getElementById('result-area').innerHTML='';
+  document.getElementById('history-area').innerHTML='';
   renderStep();
 }
 
 function renderHistory() {
-  if (!answered.length) return;
-  const items = answered.map(h => `
+  if (!answered.length) { document.getElementById('history-area').innerHTML=''; return; }
+  const items = answered.map(h=>`
     <div class="history-item">
-      <span class="history-badge ${h.a ? 'badge-y' : 'badge-n'}">${h.a ? '예' : '아니오'}</span>
+      <span class="hbadge ${h.a?'y':'n'}">${h.a?'예':'아니오'}</span>
       <span>${h.q}</span>
-    </div>
-  `).join('');
-  document.getElementById('history-area').innerHTML = `
+    </div>`).join('');
+  document.getElementById('history-area').innerHTML=`
     <div class="history-wrap">
-      <div class="history-title">답변 이력</div>
-      ${items}
-    </div>
-  `;
+      <div class="history-title">답변 이력</div>${items}
+    </div>`;
 }
 </script>
 </body>
